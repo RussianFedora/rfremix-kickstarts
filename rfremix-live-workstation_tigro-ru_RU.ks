@@ -55,7 +55,14 @@ menu-accelerator-enabled=false
 dark-theme=true
 FOE
 
+cat >> /usr/share/glib-2.0/schemas/org.gnome.shell.gschema.override << FOE
+[org.gnome.shell]
+favorite-apps=['chromium-browser.desktop', 'evolution.desktop', 'rhythmbox.desktop', 'shotwell.desktop', 'org.gnome.Nautilus.desktop', 'org.gnome.Software.desktop']
+FOE
+
 glib-compile-schemas /usr/share/glib-2.0/schemas
+
+xdg-settings set default-web-browser chromium-browser.desktop
 
 EOF
 

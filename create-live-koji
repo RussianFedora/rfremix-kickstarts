@@ -89,6 +89,11 @@ do
     declare -l lspin
     lspin=$spin
     ksflatten $KSEXTRAARGS -c rfremix-live-$lspin-ru_RU.ks -o rfremix-live-$lspin-$GITHASH-ru_RU.ks >& /dev/null
+
+    if [ "$lspin" == "workstation_tigro" ]; then
+        sed -i 's@firefox.desktop@chromium-browser.desktop@g' rfremix-live-$lspin-$GITHASH-ru_RU.ks
+    fi
+
     for ARCH in $ARCHES
     do
        if [[ $ARCH == i686 ]]
