@@ -35,6 +35,7 @@ rpmdevtools
 shutter
 skype
 telegram-desktop
+ucs-miscfixed-fonts
 viber
 xchat
 %end
