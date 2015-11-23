@@ -24,10 +24,12 @@ mythes-ru
 @rfremix-workstation-product
 chromium
 chromium-pepper-flash
+dconf-editor
 deluge
 gcc
 gcc-c++
 gimp
+gconf-editor
 kernel-devel
 libappindicator
 mpv
