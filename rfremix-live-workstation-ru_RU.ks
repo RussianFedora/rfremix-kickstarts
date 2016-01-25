@@ -44,12 +44,12 @@ cat > /usr/share/glib-2.0/schemas/org.gnome.shell.extensions.user-theme.gschema.
 name='Korora'
 FOE
 
-# set EvoPop icon and gtk themes by default
-cat > /usr/share/glib-2.0/schemas/org.gnome.desktop.interface.gschema.override <<FOE
-[org.gnome.desktop.interface]
-icon-theme='EvoPop'
-gtk-theme='evopop-gtk-theme'
-FOE
+## set EvoPop icon and gtk themes by default
+#cat > /usr/share/glib-2.0/schemas/org.gnome.desktop.interface.gschema.override <<FOE
+#[org.gnome.desktop.interface]
+#icon-theme='EvoPop'
+#gtk-theme='evopop-gtk-theme'
+#FOE
 
 glib-compile-schemas /usr/share/glib-2.0/schemas
 
