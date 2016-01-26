@@ -38,12 +38,6 @@ menu-accelerator-enabled=false
 dark-theme=true
 FOE
 
-# set Korora Shell theme by default
-cat > /usr/share/glib-2.0/schemas/org.gnome.shell.extensions.user-theme.gschema.override <<FOE
-[org.gnome.shell.extensions.user-theme]
-name='Korora'
-FOE
-
 ## set EvoPop icon and gtk themes by default
 #cat > /usr/share/glib-2.0/schemas/org.gnome.desktop.interface.gschema.override <<FOE
 #[org.gnome.desktop.interface]
