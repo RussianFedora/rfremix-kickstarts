@@ -92,7 +92,7 @@ do
          then BASEARCH=i386
          else BASEARCH=$ARCH
        fi
-    koji spin-livecd --scratch  --release $BUILD --noprogress RFRemix-Live-$spin-$ARCH $RELEASE --nowait \
+    koji spin-livecd --release $BUILD --noprogress RFRemix-Live-$spin-$ARCH $RELEASE --nowait \
 	--repo=http://mirror.yandex.ru/fedora/linux/releases/$VERSION/Everything/$BASEARCH/os/ \
 	--repo=http://mirror.yandex.ru/fedora/linux/updates/$VERSION/$BASEARCH/ \
 	--repo=http://mirror.yandex.ru/fedora/rpmfusion/free/fedora/releases/22/Everything/$BASEARCH/os/ \
