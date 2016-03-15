@@ -20,6 +20,8 @@ hyphen-ru
 libreoffice-langpack-ru  
 mythes-ru
 
+kde-partitionmanager
+
 # vpn for Beeline
 plasma-nm-l2tp
 
