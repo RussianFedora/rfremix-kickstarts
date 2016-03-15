@@ -18,6 +18,8 @@ hyphen-ru
 libreoffice-langpack-ru  
 mythes-ru
 
+gparted
+
 # Classic session for GNOME
 @rfremix-workstation-product
 %end

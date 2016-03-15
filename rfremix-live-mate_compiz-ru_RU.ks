@@ -17,4 +17,6 @@ hunspell-ru
 hyphen-ru 
 libreoffice-langpack-ru  
 mythes-ru
+
+gparted
 %end

@@ -18,6 +18,7 @@ hyphen-ru
 libreoffice-langpack-ru  
 mythes-ru
 
+gparted
 xfce4-kbdleds-plugin
 xfce4-xkb-plugin
 %end
