@@ -5,7 +5,7 @@ export LANG=C
 usage()
 {
   echo
-  echo "Create RFRemix Live images based on Fedora 23 package base"
+  echo "Create RFRemix Live images based on Fedora 24 package base"
   echo "from internet."
   echo
   echo "create-live <imagename> <i686|x86_64|all> <version>"
