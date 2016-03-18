@@ -46,18 +46,25 @@ elif [ "$STAGE" == "devel" ]; then
     KOJI_REPO_NAME="dist-rfr$VERSION-devel-build"
     COMPS_VERSION="$VERSION"
     GIT_VERSION="f$VERSION/master"
+else
+    KOJI_REPO_NAME="dist-rfr$VERSION-build"
+    COMPS_VERSION="$VERSION"
+    GIT_VERSION="f$VERSION/master"
 fi
 
 BASEARCH="x86_64"
 
-if [ "$STAGE" == "devel" -o "$STAGE" == "rawhide" ]; then
-    rm -rf comps
-    git clone -b $GIT_VERSION git://github.com/RussianFedora/russianfedora-comps.git comps/
+rm -rf comps
+git clone -b $GIT_VERSION git://github.com/RussianFedora/russianfedora-comps.git comps/
 
+if [ "$STAGE" == "devel" -o "$STAGE" == "rawhide" ]; then
     COMPS_URL="ftp://mirror.yandex.ru/fedora/linux/development/$VERSION/Everything/x86_64/os/repodata/"
-    
     curl -LJ -o comps/fedora.xml $COMPS_URL$(curl -s $COMPS_URL | grep comps | awk '/\.xml$/ { print $NF }')
 
-    yum-groups-manager --disablerepo='*' --config=/etc/yum.conf \
-        $(find comps/ -type f -name "*.xml" | sed 's@^@--load=@g') --save $KOJI_REPO_NAME.xml -n base
+else
+    COMPS_URL="ftp://mirror.yandex.ru/fedora/linux/updates/$VERSION/x86_64/repodata/"
+    curl -LJ -o comps/fedora.xml $COMPS_URL$(curl -s $COMPS_URL | grep comps | awk '/\.xml$/ { print $NF }')
 fi
+
+yum-groups-manager --disablerepo='*' --config=/etc/yum.conf \
+    $(find comps/ -type f -name "*.xml" | sed 's@^@--load=@g') --save $KOJI_REPO_NAME.xml -n base
