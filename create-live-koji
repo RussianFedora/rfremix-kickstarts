@@ -9,7 +9,7 @@ usage()
   echo "Create RFRemix Live images based on Fedora 24 package base"
   echo "from internet."
   echo
-  echo "create-live <imagename> <i686|x86_64|all> <version> <release>"
+  echo "create-live <imagename> <i686|x86_64|all> <version> <release> [--scratch]"
   echo "	-c - Cinnamon LiveCD"
   echo "	-w - Workstation (with GNOME) LiveCD"
   echo "	-k - KDE LiveCD"
@@ -64,6 +64,12 @@ esac
 
 RELEASE=$3
 BUILD=$4
+SCRATCH=$5
+
+if [ "x$SCRATCH" != "x" -a "x$SCRATCH" != "x--scratch" ]; then
+  echo "Unknown parameter $SCRATCH"
+  usage
+fi
 
 if [ "x$RELEASE" == "x" -o "x$BUILD" == "x" ]; then
   usage
@@ -95,7 +101,7 @@ do
        fi
 
         if [ "x$DEVEL" != "x" ]; then
-            koji spin-livecd --release $BUILD --skip-tag --noprogress RFRemix-Live-$spin-$ARCH $RELEASE --nowait \
+            koji spin-livecd $SCRATCH --release $BUILD --skip-tag --noprogress RFRemix-Live-$spin-$ARCH $RELEASE --nowait \
 		--repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/branding/fedora/development/$VERSION/$BASEARCH/os \
 		--repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/fixes/fedora/development/$VERSION/$BASEARCH/os \
 		--repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/free/fedora/development/$VERSION/$BASEARCH/os \
@@ -104,7 +110,7 @@ do
 		$TARGET $ARCH rfremix-live-$lspin-$GITHASH-ru_RU.ks
 
         else
-	    koji spin-livecd --release $BUILD --skip-tag --noprogress RFRemix-Live-$spin-$ARCH $RELEASE --nowait \
+	    koji spin-livecd $SCRATCH --release $BUILD --skip-tag --noprogress RFRemix-Live-$spin-$ARCH $RELEASE --nowait \
 		--repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/branding/fedora/releases/$VERSION/Everything/$BASEARCH/os \
 		--repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/branding/fedora/updates/$VERSION/$BASEARCH \
 		--repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/fixes/fedora/releases/$VERSION/Everything/$BASEARCH/os \
