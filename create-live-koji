@@ -75,7 +75,7 @@ if [ "x$RELEASE" == "x" -o "x$BUILD" == "x" ]; then
   usage
 fi
 
-VERSION=$(echo $RELEASE | awk -F[.-] '{ print $1 }')
+VERSION=$(echo $RELEASE | awk -F[_.-] '{ print $1 }')
 
 KSEXTRAARGS="-v F21"
 DEVEL="-devel"
@@ -102,24 +102,38 @@ do
 
         if [ "x$DEVEL" != "x" ]; then
             koji spin-livecd $SCRATCH --release $BUILD --skip-tag --noprogress RFRemix-Live-$spin-$ARCH $RELEASE --nowait \
-		--repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/branding/fedora/development/$VERSION/$BASEARCH/os \
-		--repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/fixes/fedora/development/$VERSION/$BASEARCH/os \
-		--repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/free/fedora/development/$VERSION/$BASEARCH/os \
-		--repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/nonfree/fedora/development/$VERSION/$BASEARCH/os \
-		--repo=http://repos.russianfedora.pro/dist-rfr$VERSION-devel-build/latest/$BASEARCH/ \
+                --repo=http://dl.fedoraproject.org/pub/fedora/linux/development/$VERSION/Everything/$BASEARCH/os/ \
+                --repo=http://dl.fedoraproject.org/pub/fedora/linux/updates/testing/$VERSION/$BASEARCH/ \
+                --repo=http://mirror.yandex.ru/fedora/rpmfusion/free/fedora/releases/22/Everything/$BASEARCH/os/ \
+                --repo=http://mirror.yandex.ru/fedora/rpmfusion/free/fedora/updates/22/$BASEARCH/ \
+                --repo=http://mirror.yandex.ru/fedora/rpmfusion/free/fedora/updates/testing/23/$BASEARCH/ \
+                --repo=http://mirror.yandex.ru/fedora/rpmfusion/nonfree/fedora/releases/22/Everything/$BASEARCH/os/ \
+                --repo=http://mirror.yandex.ru/fedora/rpmfusion/nonfree/fedora/updates/22/$BASEARCH/ \
+                --repo=http://mirror.yandex.ru/fedora/rpmfusion/nonfree/fedora/updates/testing/23/$BASEARCH/ \
+                --repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/branding/fedora/development/$VERSION/$BASEARCH/os \
+                --repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/fixes/fedora/development/$VERSION/$BASEARCH/os \
+                --repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/free/fedora/development/$VERSION/$BASEARCH/os \
+                --repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/nonfree/fedora/development/$VERSION/$BASEARCH/os \
 		$TARGET $ARCH rfremix-live-$lspin-$GITHASH-ru_RU.ks
 
         else
 	    koji spin-livecd $SCRATCH --release $BUILD --skip-tag --noprogress RFRemix-Live-$spin-$ARCH $RELEASE --nowait \
-		--repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/branding/fedora/releases/$VERSION/Everything/$BASEARCH/os \
-		--repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/branding/fedora/updates/$VERSION/$BASEARCH \
-		--repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/fixes/fedora/releases/$VERSION/Everything/$BASEARCH/os \
-		--repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/fixes/fedora/updates/$VERSION/$BASEARCH \
-		--repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/free/fedora/releases/$VERSION/Everything/$BASEARCH/os \
-		--repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/free/fedora/updates/$VERSION/$BASEARCH \
-		--repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/nonfree/fedora/releases/$VERSION/Everything/$BASEARCH/os \
-		--repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/nonfree/fedora/updates/$VERSION/$BASEARCH \
-		--repo=http://repos.russianfedora.pro/dist-rfr$VERSION-build/latest/$BASEARCH/ \
+                --repo=http://mirror.yandex.ru/fedora/linux/releases/$VERSION/Everything/$BASEARCH/os/ \
+                --repo=http://mirror.yandex.ru/fedora/linux/updates/$VERSION/$BASEARCH/ \
+                --repo=http://mirror.yandex.ru/fedora/rpmfusion/free/fedora/releases/22/Everything/$BASEARCH/os/ \
+                --repo=http://mirror.yandex.ru/fedora/rpmfusion/free/fedora/updates/22/$BASEARCH/ \
+                --repo=http://mirror.yandex.ru/fedora/rpmfusion/free/fedora/updates/testing/$VERSION/$BASEARCH/ \
+                --repo=http://mirror.yandex.ru/fedora/rpmfusion/nonfree/fedora/releases/22/Everything/$BASEARCH/os/ \
+                --repo=http://mirror.yandex.ru/fedora/rpmfusion/nonfree/fedora/updates/22/$BASEARCH/ \
+                --repo=http://mirror.yandex.ru/fedora/rpmfusion/nonfree/fedora/updates/testing/$VERSION/$BASEARCH/ \
+                --repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/branding/fedora/releases/$VERSION/Everything/$BASEARCH/os \
+                --repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/branding/fedora/updates/$VERSION/$BASEARCH \
+                --repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/fixes/fedora/releases/$VERSION/Everything/$BASEARCH/os \
+                --repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/fixes/fedora/updates/$VERSION/$BASEARCH \
+                --repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/free/fedora/releases/$VERSION/Everything/$BASEARCH/os \
+                --repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/free/fedora/updates/$VERSION/$BASEARCH \
+                --repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/nonfree/fedora/releases/$VERSION/Everything/$BASEARCH/os \
+                --repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/nonfree/fedora/updates/$VERSION/$BASEARCH \
 		$TARGET $ARCH rfremix-live-$lspin-$GITHASH-ru_RU.ks
        fi
    done
