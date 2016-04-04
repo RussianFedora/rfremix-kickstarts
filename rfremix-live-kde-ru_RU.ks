@@ -12,13 +12,8 @@ timezone Europe/Moscow
 
 %packages
 -kde-i18n-Russian
-kde-l10n-Russian
-aspell-ru
-autocorr-ru 
-hunspell-ru 
-hyphen-ru 
-libreoffice-langpack-ru  
-mythes-ru
+kde-l10n-ru
+kde-l10n-kk
 
 kde-partitionmanager
 
