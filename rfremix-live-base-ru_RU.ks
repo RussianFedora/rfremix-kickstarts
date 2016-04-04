@@ -4,6 +4,15 @@
 # Fonts and input methods for Russia
 
 %packages
+aspell-ru
+autocorr-ru
+hunspell-ru
+hunspell-kk
+hyphen-ru
+libreoffice-langpack-ru
+libreoffice-langpack-kk
+mythes-ru
+
 # fonts for Russia
 dejavu-sans-fonts
 dejavu-sans-mono-fonts
