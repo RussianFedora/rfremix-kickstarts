@@ -14,6 +14,7 @@ timezone Europe/Moscow
 -kde-i18n-Russian
 kde-l10n-ru
 kde-l10n-kk
+kde-l10n-uk
 
 kde-partitionmanager
 

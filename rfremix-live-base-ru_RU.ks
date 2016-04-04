@@ -5,13 +5,18 @@
 
 %packages
 aspell-ru
+aspell-uk
 autocorr-ru
 hunspell-ru
 hunspell-kk
+hunspell-uk
 hyphen-ru
+hyphen-uk
 libreoffice-langpack-ru
 libreoffice-langpack-kk
+libreoffice-langpack-uk
 mythes-ru
+mythes-uk
 
 # fonts for Russia
 dejavu-sans-fonts
