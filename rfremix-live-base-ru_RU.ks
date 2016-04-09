@@ -5,7 +5,6 @@
 
 %packages
 aspell-ru
-aspell-uk
 autocorr-ru
 hunspell-ru
 hunspell-kk
