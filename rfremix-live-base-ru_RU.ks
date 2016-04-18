@@ -59,6 +59,10 @@ russianfedora-fixes-release
 russianfedora-nonfree-release
 russianfedora-branding-release
 
+# drop p7zip as it does not support cyrillic cp1251 zip files
+# new Fedora unzip support it without any patches
+-p7zip
+
 # vpn for Beeline
 NetworkManager-l2tp
 
