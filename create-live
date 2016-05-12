@@ -111,7 +111,7 @@ if [ "$?" -eq 0 -a "$(uname -m)" != "x86_64" ]; then
 fi
 
 version=$3
-releasever=$(echo $version | awk -F[.-] '{ print $1 }')
+releasever=$(echo $version | awk -F[_.-] '{ print $1 }')
 
 if [ "x$version" == "x" ]; then
   usage
