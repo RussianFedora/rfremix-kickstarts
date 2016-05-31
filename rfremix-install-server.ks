@@ -86,6 +86,11 @@ dracut-*
 -kde*
 -lightdm-kde
 -lightdm-razorqt
+# No Oracle Java
+-java-1.8.0-oracle*
+-java-1.7.0-oracle*
+# No Opera
+-opera*
 # Pulls in qt
 -oprofile-gui
 
