@@ -15,15 +15,11 @@
 # Because the install kickstart doesn't use the updates repo and does 
 # use the source repo, we can't just include fedora-repo.ks
 
-# In the master branch the rawhide repo commands should be uncommented.
-#repo --name=rawhide --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=rawhide&arch=$basearch --excludepkgs=fedora-productimg-cloud,fedora-productimg-workstation
-#repo --name=rawhide-source  --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=rawhide-source&arch=$basearch --excludepkgs=fedora-productimg-cloud,fedora-productimg-workstation
-
 # In non-master branches the fedora repo commands should be uncommented
-repo --name=fedora --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=fedora-24&arch=$basearch --excludepkgs=fedora-productimg-cloud,fedora-productimg-workstation
-repo --name=fedora-source  --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=fedora-source-24&arch=$basearch --excludepkgs=fedora-productimg-cloud,fedora-productimg-workstation
-repo --name=fedora-updates --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=updates-released-f24&arch=$basearch --excludepkgs=fedora-productimg-cloud,fedora-productimg-server
-repo --name=fedora-updates-source  --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=updates-released-source-f24&arch=$basearch --excludepkgs=fedora-productimg-cloud,fedora-productimg-server
+repo --name=fedora --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=fedora-24&arch=$basearch --excludepkgs=fedora-productimg-cloud,fedora-productimg-workstation,fedora-release,fedora-release-server
+repo --name=fedora-source  --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=fedora-source-24&arch=$basearch --excludepkgs=fedora-productimg-cloud,fedora-productimg-workstation,fedora-release,fedora-release-server
+repo --name=fedora-updates --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=updates-released-f24&arch=$basearch --excludepkgs=fedora-productimg-cloud,fedora-productimg-server,fedora-release,fedora-release-server
+repo --name=fedora-updates-source  --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=updates-released-source-f24&arch=$basearch --excludepkgs=fedora-productimg-cloud,fedora-productimg-server,fedora-release,fedora-release-server
 
 # RPMFusion Repos
 repo --name=rpmfusion-free --mirrorlist=http://mirrors.rpmfusion.org/mirrorlist?repo=free-fedora-22&arch=$basearch
@@ -110,45 +106,27 @@ dracut-*
 # this will be the default environment.
 @^rfremix-server-product-environment
 @rfremix-server-product
+@^server-product-environment
+@server-product
 @headless-management
 @container-management
 @domain-client
 @server-hardware-support
 
 # Common server packages
-@mysql
 @sql-server
 @web-server
 
-# Web Server environment
-@haproxy
-@mongodb
-@python-web
-@php
-@rubyonrails
-@tomcat
 
 # Infrastructure Server
-@directory-server
-@dogtag
-@dns-server
 @freeipa-server
-@ftp-server
 @mail-server
-@network-server
-@printing
 @smb-server
 @virtualization-headless
-@load-balancer
-@ha
-
-@javaenterprise
 
 # “uservisible” groups we want to offer
+@ansible-node
 @editors
-@network-server
-@system-tools
-@text-internet
 
 # Things needed for installation
 @anaconda-tools
