@@ -88,6 +88,10 @@ fi
 
 GITHASH=$(git rev-parse --short HEAD)
 
+# drop url lines before build
+cp spin-kickstarts/fedora-repo-not-rawhide.ks spin-kickstarts/fedora-repo-not-rawhide.ks.orig
+sed -i '/^url/d' spin-kickstarts/fedora-repo-not-rawhide.ks
+
 for spin in $SPINS
 do
     declare -l lspin
@@ -139,3 +143,4 @@ do
    done
 done
 
+mv spin-kickstarts/fedora-repo-not-rawhide.ks.orig spin-kickstarts/fedora-repo-not-rawhide.ks
