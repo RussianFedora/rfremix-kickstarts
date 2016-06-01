@@ -43,7 +43,7 @@ FOE
 glib-compile-schemas /usr/share/glib-2.0/schemas
 
 # enable gdm by default
-systemctl enable gdm
+systemctl -f enable gdm.service
 
 EOF
 
