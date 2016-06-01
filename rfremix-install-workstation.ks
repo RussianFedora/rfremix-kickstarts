@@ -1,5 +1,7 @@
-repo --name=fedora-updates --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=updates-released-f$releasever&arch=$basearch --excludepkgs=fedora-productimg-cloud,fedora-productimg-server
-repo --name=fedora-updates-source  --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=updates-released-source-f$releasever&arch=$basearch --excludepkgs=fedora-productimg-cloud,fedora-productimg-server
+repo --name=fedora --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=fedora-24&arch=$basearch --excludepkgs=fedora-productimg-cloud,fedora-productimg-server
+repo --name=fedora-source --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=fedora-source-24&arch=$basearch --excludepkgs=fedora-productimg-cloud,fedora-productimg-server
+repo --name=fedora-updates --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=updates-released-f24&arch=$basearch --excludepkgs=fedora-productimg-cloud,fedora-productimg-server
+repo --name=fedora-updates-source  --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=updates-released-source-f24&arch=$basearch --excludepkgs=fedora-productimg-cloud,fedora-productimg-server
 
 # RPMFusion Repos
 repo --name=rpmfusion-free --mirrorlist=http://mirrors.rpmfusion.org/mirrorlist?repo=free-fedora-22&arch=$basearch
