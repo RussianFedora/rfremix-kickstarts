@@ -15,3 +15,5 @@ repo --name=russianfedora-fixes --mirrorlist=http://mirrors.rfremix.ru/mirrorlis
 repo --name=russianfedora-fixes-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=fixes-fedora-updates-released-$releasever&arch=$basearch
 repo --name=russianfedora-branding --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=branding-fedora-$releasever&arch=$basearch
 repo --name=russianfedora-branding-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=branding-fedora-updates-released-$releasever&arch=$basearch
+
+repo --name=local --baseurl=ftp://localhost/pub/branding/
