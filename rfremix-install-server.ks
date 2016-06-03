@@ -16,10 +16,10 @@
 # use the source repo, we can't just include fedora-repo.ks
 
 # In non-master branches the fedora repo commands should be uncommented
-repo --name=fedora --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=fedora-24&arch=$basearch --excludepkgs=fedora-productimg-cloud,fedora-productimg-workstation,fedora-release,fedora-release-server
-repo --name=fedora-source  --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=fedora-source-24&arch=$basearch --excludepkgs=fedora-productimg-cloud,fedora-productimg-workstation,fedora-release,fedora-release-server
-repo --name=fedora-updates --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=updates-released-f24&arch=$basearch --excludepkgs=fedora-productimg-cloud,fedora-productimg-server,fedora-release,fedora-release-server
-repo --name=fedora-updates-source  --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=updates-released-source-f24&arch=$basearch --excludepkgs=fedora-productimg-cloud,fedora-productimg-server,fedora-release,fedora-release-server
+repo --name=fedora --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=fedora-24&arch=$basearch --excludepkgs=fedora-productimg-cloud,fedora-productimg-workstation,fedora-release,fedora-release-server,fedora-release,fedora-release-workstation,generic-release*,fedora-logos*
+repo --name=fedora-source  --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=fedora-source-24&arch=$basearch --excludepkgs=fedora-productimg-cloud,fedora-productimg-workstation,fedora-release,fedora-release-server,fedora-release,fedora-release-workstation,generic-release*,fedora-logos*
+repo --name=fedora-updates --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=updates-released-f24&arch=$basearch --excludepkgs=fedora-productimg-cloud,fedora-productimg-workstation,fedora-release,fedora-release-server,fedora-release,fedora-release-workstation,generic-release*,fedora-logos*
+repo --name=fedora-updates-source  --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=updates-released-source-f24&arch=$basearch --excludepkgs=fedora-productimg-cloud,fedora-productimg-workstation,fedora-release,fedora-release-server,fedora-release,fedora-release-workstation,generic-release*,fedora-logos*
 
 # RPMFusion Repos
 repo --name=rpmfusion-free --mirrorlist=http://mirrors.rpmfusion.org/mirrorlist?repo=free-fedora-22&arch=$basearch
