@@ -59,6 +59,17 @@ russianfedora-fixes-release
 russianfedora-nonfree-release
 russianfedora-branding-release
 
+# drop fedora branding
+-fedora-logos*
+-fedora-release
+-fedora-release-atomichost
+-fedora-release-cloud
+-fedora-release-server
+-fedora-release-workstation
+-generic-logos*
+-generic-release
+-generic-release-notes
+
 # drop p7zip as it does not support cyrillic cp1251 zip files
 # new Fedora unzip support it without any patches
 -p7zip
