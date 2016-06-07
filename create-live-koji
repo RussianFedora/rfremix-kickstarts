@@ -120,6 +120,7 @@ do
                 --repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/free/fedora/development/$VERSION/$BASEARCH/os \
                 --repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/nonfree/fedora/development/$VERSION/$BASEARCH/os \
 		$TARGET $ARCH rfremix-live-$lspin-$GITHASH-ru_RU-$BASEARCH.ks
+            rm -f rfremix-live-$lspin-$GITHASH-ru_RU-$BASEARCH.ks
 
         else
 	    koji spin-livecd $SCRATCH --release $BUILD --skip-tag --noprogress RFRemix-Live-$spin-$ARCH $RELEASE --nowait \
@@ -140,6 +141,7 @@ do
                 --repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/nonfree/fedora/releases/$VERSION/Everything/$BASEARCH/os \
                 --repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/nonfree/fedora/updates/$VERSION/$BASEARCH \
 		$TARGET $ARCH rfremix-live-$lspin-$GITHASH-ru_RU-$BASEARCH.ks
+            rm -f rfremix-live-$lspin-$GITHASH-ru_RU-$BASEARCH.ks
        fi
    done
 done
