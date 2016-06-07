@@ -111,7 +111,7 @@ do
         if [ "x$DEVEL" != "x" ]; then
             koji spin-livecd $SCRATCH --release $BUILD --skip-tag --noprogress RFRemix-Live-$spin-$ARCH $RELEASE --nowait \
                 --repo=http://repos.russianfedora.pro/dist-rfr$VERSION-devel-build/latest/$BASEARCH/ \
-                --repo=http://dl.fedoraproject.org/pub/fedora/linux/updates/testing/$VERSION/$BASEARCH/ \
+                --repo=http://dl.fedoraproject.org/pub/fedora/linux/updates/$VERSION/$BASEARCH/ \
                 --repo=http://mirror.yandex.ru/fedora/rpmfusion/free/fedora/releases/22/Everything/$BASEARCH/os/ \
                 --repo=http://mirror.yandex.ru/fedora/rpmfusion/free/fedora/updates/22/$BASEARCH/ \
                 --repo=http://mirror.yandex.ru/fedora/rpmfusion/free/fedora/updates/testing/23/$BASEARCH/ \
