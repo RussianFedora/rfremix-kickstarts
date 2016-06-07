@@ -92,12 +92,15 @@ GITHASH=$(git rev-parse --short HEAD)
 cp spin-kickstarts/fedora-repo-not-rawhide.ks spin-kickstarts/fedora-repo-not-rawhide.ks.orig
 sed -i '/^url/d' spin-kickstarts/fedora-repo-not-rawhide.ks
 
+# define current UNIX time
+DATE=$(date +%s)
+
 for spin in $SPINS
 do
     declare -l lspin
     lspin=$spin
-    ksflatten $KSEXTRAARGS -c rfremix-live-$lspin-ru_RU.ks -o rfremix-live-$lspin-$GITHASH-ru_RU-x86_64.ks >& /dev/null
-    ln -f rfremix-live-$lspin-$GITHASH-ru_RU-x86_64.ks rfremix-live-$lspin-$GITHASH-ru_RU-i386.ks
+    ksflatten $KSEXTRAARGS -c rfremix-live-$lspin-ru_RU.ks -o rfremix-live-$lspin-$GITHASH-$DATE-ru_RU-x86_64.ks >& /dev/null
+    ln -f rfremix-live-$lspin-$GITHASH-ru_RU-x86_64.ks rfremix-live-$lspin-$GITHASH-$DATE-ru_RU-i386.ks
     for ARCH in $ARCHES
     do
        if [[ $ARCH == i686 ]]
@@ -119,8 +122,8 @@ do
                 --repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/fixes/fedora/development/$VERSION/$BASEARCH/os \
                 --repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/free/fedora/development/$VERSION/$BASEARCH/os \
                 --repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/nonfree/fedora/development/$VERSION/$BASEARCH/os \
-		$TARGET $ARCH rfremix-live-$lspin-$GITHASH-ru_RU-$BASEARCH.ks
-            rm -f rfremix-live-$lspin-$GITHASH-ru_RU-$BASEARCH.ks
+		$TARGET $ARCH rfremix-live-$lspin-$GITHASH-$DATE-ru_RU-$BASEARCH.ks
+            rm -f rfremix-live-$lspin-$GITHASH-$DATE-ru_RU-$BASEARCH.ks
 
         else
 	    koji spin-livecd $SCRATCH --release $BUILD --skip-tag --noprogress RFRemix-Live-$spin-$ARCH $RELEASE --nowait \
@@ -140,8 +143,8 @@ do
                 --repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/free/fedora/updates/$VERSION/$BASEARCH \
                 --repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/nonfree/fedora/releases/$VERSION/Everything/$BASEARCH/os \
                 --repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/nonfree/fedora/updates/$VERSION/$BASEARCH \
-		$TARGET $ARCH rfremix-live-$lspin-$GITHASH-ru_RU-$BASEARCH.ks
-            rm -f rfremix-live-$lspin-$GITHASH-ru_RU-$BASEARCH.ks
+		$TARGET $ARCH rfremix-live-$lspin-$GITHASH-$DATE-ru_RU-$BASEARCH.ks
+            rm -f rfremix-live-$lspin-$GITHASH-$DATE-ru_RU-$BASEARCH.ks
        fi
    done
 done
