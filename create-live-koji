@@ -100,6 +100,13 @@ DATE=$(date +%s)
 
 for spin in $SPINS
 do
+    # added external repo
+    if [ "x$spin" == "xWorkstation-Tigro" ]; then
+        EXTERNAL_PARAM="--repo=http://mirror.yandex.ru/fedora/linux/development/$VERSION/Everything/$BASEARCH/os/"
+    else
+        unset EXTERNAL_PARAM
+    fi
+
     declare -l lspin
     lspin=$spin
     ksflatten $KSEXTRAARGS -c rfremix-live-$lspin-ru_RU.ks -o rfremix-live-$lspin-$GITHASH-$DATE-ru_RU-x86_64.ks >& /dev/null
@@ -125,7 +132,7 @@ do
                 --repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/fixes/fedora/development/$VERSION/$BASEARCH/os \
                 --repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/free/fedora/development/$VERSION/$BASEARCH/os \
                 --repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/nonfree/fedora/development/$VERSION/$BASEARCH/os \
-		$TARGET $ARCH rfremix-live-$lspin-$GITHASH-$DATE-ru_RU-$BASEARCH.ks
+                $EXTERNAL_PARAM	$TARGET $ARCH rfremix-live-$lspin-$GITHASH-$DATE-ru_RU-$BASEARCH.ks
             rm -f rfremix-live-$lspin-$GITHASH-$DATE-ru_RU-$BASEARCH.ks
 
         else
@@ -146,7 +153,7 @@ do
                 --repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/free/fedora/updates/$VERSION/$BASEARCH \
                 --repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/nonfree/fedora/releases/$VERSION/Everything/$BASEARCH/os \
                 --repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/nonfree/fedora/updates/$VERSION/$BASEARCH \
-		$TARGET $ARCH rfremix-live-$lspin-$GITHASH-$DATE-ru_RU-$BASEARCH.ks
+                $EXTERNAL_PARAM $TARGET $ARCH rfremix-live-$lspin-$GITHASH-$DATE-ru_RU-$BASEARCH.ks
             rm -f rfremix-live-$lspin-$GITHASH-$DATE-ru_RU-$BASEARCH.ks
        fi
    done
