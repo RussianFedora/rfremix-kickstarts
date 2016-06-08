@@ -6,6 +6,7 @@
 %include spin-kickstarts/fedora-live-workstation.ks
 %include rfremix-live-base-ru_RU.ks
 
+repo --name=fedora-main --mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=fedora-24&arch=$basearch
 lang ru_RU.UTF-8
 keyboard ru
 timezone Europe/Moscow
