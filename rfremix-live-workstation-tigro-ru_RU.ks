@@ -48,6 +48,7 @@ cat > /usr/share/glib-2.0/schemas/org.gnome.desktop.interface.gschema.override <
 [org.gnome.desktop.interface]
 icon-theme='EvoPop'
 gtk-theme='Adapta'
+text-scaling-factor=0.96999999999999997
 FOE
 
 glib-compile-schemas /usr/share/glib-2.0/schemas
