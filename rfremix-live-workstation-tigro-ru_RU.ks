@@ -46,6 +46,34 @@ FOE
 
 glib-compile-schemas /usr/share/glib-2.0/schemas
 
+cat >> /etc/skel/.config/mimeapps.list << FOE
+[Default Applications]
+x-scheme-handler/http=chromium-browser.desktop
+application/x-extension-htm=chromium-browser.desktop
+application/x-extension-html=chromium-browser.desktop
+application/x-extension-shtml=chromium-browser.desktop
+application/x-extension-xht=chromium-browser.desktop
+application/x-extension-xhtml=chromium-browser.desktop
+application/xhtml+xml=chromium-browser.desktop
+text/html=chromium-browser.desktop
+x-scheme-handler/chrome=chromium-browser.desktop
+x-scheme-handler/ftp=chromium-browser.desktop
+x-scheme-handler/https=chromium-browser.desktop
+
+[Added Associations]
+application/x-extension-htm=chromium-browser.desktop;
+application/x-extension-html=chromium-browser.desktop;
+application/x-extension-shtml=chromium-browser.desktop;
+application/x-extension-xht=chromium-browser.desktop;
+application/x-extension-xhtml=chromium-browser.desktop;
+application/xhtml+xml=chromium-browser.desktop;
+text/html=chromium-browser.desktop;
+x-scheme-handler/chrome=chromium-browser.desktop;
+x-scheme-handler/ftp=chromium-browser.desktop;
+x-scheme-handler/https=chromium-browser.desktop;
+FOE
+
+
 cat >> /etc/rc.d/init.d/livesys << EOF
 # add us,ru layouts by default
 cat > /usr/share/glib-2.0/schemas/org.gnome.desktop.input-sources.gschema.override << FOE
