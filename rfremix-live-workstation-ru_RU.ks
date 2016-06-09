@@ -26,13 +26,6 @@ sources=[('xkb', 'us'), ('xkb', 'ru')]
 xkb-options=['grp:alt_shift_toggle,grp_led:scroll']
 FOE
 
-# enable menu accelerator
-cat > /usr/share/glib-2.0/schemas/org.gnome.Terminal.gschema.override <<FOE
-[org.gnome.Terminal.Legacy.Settings]
-menu-accelerator-enabled=false
-dark-theme=true
-FOE
-
 ## set EvoPop icon and gtk themes by default
 #cat > /usr/share/glib-2.0/schemas/org.gnome.desktop.interface.gschema.override <<FOE
 #[org.gnome.desktop.interface]
