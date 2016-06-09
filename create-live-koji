@@ -109,14 +109,14 @@ do
 
     declare -l lspin
     lspin=$spin
-    ksflatten $KSEXTRAARGS -c rfremix-live-$lspin-ru_RU.ks -o rfremix-live-$lspin-$GITHASH-$DATE-ru_RU-x86_64.ks >& /dev/null
-    ln -f rfremix-live-$lspin-$GITHASH-$DATE-ru_RU-x86_64.ks rfremix-live-$lspin-$GITHASH-$DATE-ru_RU-i386.ks
     for ARCH in $ARCHES
     do
        if [[ $ARCH == i686 ]]
          then BASEARCH=i386
          else BASEARCH=$ARCH
        fi
+
+       ksflatten $KSEXTRAARGS -c rfremix-live-$lspin-ru_RU.ks -o rfremix-live-$lspin-$GITHASH-$DATE-ru_RU-$BASEARCH.ks >& /dev/null
 
         if [ "x$DEVEL" != "x" ]; then
             koji spin-livecd $SCRATCH --release $BUILD --skip-tag --noprogress RFRemix-Live-$spin-$ARCH $RELEASE --nowait \
