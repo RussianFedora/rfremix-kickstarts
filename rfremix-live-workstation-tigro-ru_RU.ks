@@ -20,10 +20,12 @@ chromium-pepper-flash
 deluge
 gimp
 gparted
+mpv
 shutter
 skype
 telegram-desktop
 viber
+vim-enhanced
 
 # Classic session for GNOME
 @rfremix-workstation-product
