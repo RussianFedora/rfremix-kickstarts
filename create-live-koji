@@ -101,12 +101,6 @@ DATE=$(date +%s)
 for spin in $SPINS
 do
     # added external repo
-    if [ "x$spin" == "xWorkstation-Tigro" ]; then
-        EXTERNAL_PARAM="--repo=http://mirror.yandex.ru/fedora/linux/development/$VERSION/Everything/$BASEARCH/os/"
-    else
-        unset EXTERNAL_PARAM
-    fi
-
     declare -l lspin
     lspin=$spin
     for ARCH in $ARCHES
@@ -117,6 +111,13 @@ do
        fi
 
        ksflatten $KSEXTRAARGS -c rfremix-live-$lspin-ru_RU.ks -o rfremix-live-$lspin-$GITHASH-$DATE-ru_RU-$BASEARCH.ks >& /dev/null
+
+       if [ "x$spin" == "xWorkstation-Tigro" ]; then
+            EXTERNAL_PARAM="--repo=http://mirror.yandex.ru/fedora/linux/development/$VERSION/Everything/$BASEARCH/os/"
+       else
+            unset EXTERNAL_PARAM
+       fi
+
 
         if [ "x$DEVEL" != "x" ]; then
             koji spin-livecd $SCRATCH --release $BUILD --skip-tag --noprogress RFRemix-Live-$spin-$ARCH $RELEASE --nowait \
