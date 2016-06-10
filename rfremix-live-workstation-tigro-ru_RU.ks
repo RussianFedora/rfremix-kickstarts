@@ -97,7 +97,7 @@ cat > /etc/yum.repos.d/yandex-disk.repo << FOE
 [yandex]
 name=Yandex
 failovermethod=priority
-baseurl=http://dist.yandex.ru/repo.yandex.ru/yandex-disk/rpm/stable/$basearch/
+baseurl=http://dist.yandex.ru/repo.yandex.ru/yandex-disk/rpm/stable/\$basearch/
 enabled=1
 metadata_expire=1d
 gpgcheck=1
@@ -123,8 +123,8 @@ FOE
 
 cat > /etc/yum.repos.d/virtualbox.repo << FOE
 [virtualbox]
-name=Fedora $releasever - $basearch - VirtualBox
-baseurl=http://download.virtualbox.org/virtualbox/rpm/fedora/24/$basearch
+name=Fedora \$releasever - \$basearch - VirtualBox
+baseurl=http://download.virtualbox.org/virtualbox/rpm/fedora/24/\$basearch
 enabled=1
 gpgcheck=1
 repo_gpgcheck=0
