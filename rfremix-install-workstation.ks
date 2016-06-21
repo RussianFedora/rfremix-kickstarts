@@ -57,4 +57,7 @@ kernel*
 -fedora-productimg-server
 fedora-productimg-workstation
 @rfremix-workstation-product
+
+# RFRemix
+-freetype-freeworld
 %end

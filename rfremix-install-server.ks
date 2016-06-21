@@ -146,4 +146,7 @@ man-pages-*
 # Removals
 -PackageKit-zif
 -zif
+
+# RFRemix
+-freetype-freeworld
 %end
