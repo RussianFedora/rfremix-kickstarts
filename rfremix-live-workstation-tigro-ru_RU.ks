@@ -20,6 +20,7 @@ chromium-pepper-flash
 deluge
 gimp
 gparted
+libappindicator-gtk3
 mpv
 shutter
 skype

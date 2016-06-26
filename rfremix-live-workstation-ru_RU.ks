@@ -12,6 +12,7 @@ timezone Europe/Moscow
 
 %packages
 gparted
+libappindicator-gtk3
 
 # Classic session for GNOME
 @rfremix-workstation-product
