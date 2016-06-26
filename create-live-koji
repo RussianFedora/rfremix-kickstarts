@@ -139,9 +139,11 @@ do
         else
 	    koji spin-livecd $SCRATCH --release $BUILD --skip-tag --noprogress RFRemix-Live-$spin-$ARCH $RELEASE --nowait \
                 --repo=http://repos.russianfedora.pro/dist-rfr$VERSION-build/latest/$BASEARCH/ \
-                --repo=http://fedora.uib.no/fedora/linux/updates/24/$BASEARCH/ \
-                --repo=http://mirror.yandex.ru/fedora/rpmfusion/free/fedora/updates/testing/$VERSION/$BASEARCH/ \
-                --repo=http://mirror.yandex.ru/fedora/rpmfusion/nonfree/fedora/updates/testing/$VERSION/$BASEARCH/ \
+                --repo=http://fedora.uib.no/fedora/linux/updates/$VERSION/$BASEARCH/ \
+                --repo=http://mirror.yandex.ru/fedora/rpmfusion/free/fedora/releases/$VERSION/Everything/$BASEARCH/os/ \
+                --repo=http://mirror.yandex.ru/fedora/rpmfusion/nonfree/fedora/releases/$VERSION/Everything/$BASEARCH/os/ \
+                --repo=http://mirror.yandex.ru/fedora/rpmfusion/free/fedora/updates/$VERSION/$BASEARCH/ \
+                --repo=http://mirror.yandex.ru/fedora/rpmfusion/nonfree/fedora/updates/$VERSION/$BASEARCH/ \
                 --repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/branding/fedora/releases/$VERSION/Everything/$BASEARCH/os \
                 --repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/branding/fedora/updates/$VERSION/$BASEARCH \
                 --repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/fixes/fedora/releases/$VERSION/Everything/$BASEARCH/os \
