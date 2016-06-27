@@ -18,10 +18,14 @@ timezone Europe/Moscow
 chromium
 chromium-pepper-flash
 deluge
+empathy
 gimp
 gparted
 libappindicator-gtk3
 mpv
+rpm-build
+rpmdevtools
+rpmlint
 shutter
 skype
 telegram-desktop
