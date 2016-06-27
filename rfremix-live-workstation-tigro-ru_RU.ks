@@ -22,6 +22,7 @@ empathy
 gimp
 gparted
 libappindicator-gtk3
+mock-configs-rfremix
 mpv
 rpm-build
 rpmdevtools
