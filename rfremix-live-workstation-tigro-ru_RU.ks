@@ -3,6 +3,13 @@
 # Maintainer(s):
 # - Arkady L. Shane <ashejn [AT] russianfedora [DOT] ru>
 
+repo --name=google-chrome --baseurl=http://dl.google.com/linux/chrome/rpm/stable/x86_64
+repo --name=mailru --baseurl=https://linuxdesktopcloud.mail.ru/rpm/Fedora/default
+repo --name=yanex-disk --baseurl=http://dist.yandex.ru/repo.yandex.ru/yandex-disk/rpm/stable/$basearch/
+repo --name=yandex-browser --baseurl=http://repo.yandex.ru/yandex-browser/rpm/beta/$basearch
+repo --name=dropbox --baseurl=http://linux.dropbox.com/fedora/24/
+repo --name virtualbox --baseurl=http://download.virtualbox.org/virtualbox/rpm/fedora/24/$basearch
+
 %include spin-kickstarts/fedora-live-workstation.ks
 %include rfremix-live-base-ru_RU.ks
 
@@ -32,6 +39,14 @@ skype
 telegram-desktop
 viber
 vim-enhanced
+
+# proprietary
+VirtualBox-5.0
+google-chrome-stable
+mail.ru-cloud
+nautilus-dropbox
+yandex-browser-beta
+yandex-disk
 
 # Classic session for GNOME
 @rfremix-workstation-product
