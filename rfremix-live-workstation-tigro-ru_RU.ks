@@ -37,6 +37,7 @@ rpmlint
 shutter
 skype
 telegram-desktop
+unrar
 viber
 vim-enhanced
 xchat
