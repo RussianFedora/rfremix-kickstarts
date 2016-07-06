@@ -39,6 +39,7 @@ skype
 telegram-desktop
 viber
 vim-enhanced
+xchat
 
 # proprietary
 VirtualBox-5.0
