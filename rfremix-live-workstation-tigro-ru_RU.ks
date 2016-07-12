@@ -47,7 +47,7 @@ VirtualBox-5.0
 google-chrome-stable
 mail.ru-cloud
 nautilus-dropbox
-yandex-browser-beta
+#yandex-browser-beta
 yandex-disk
 
 # Classic session for GNOME
