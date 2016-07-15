@@ -9,6 +9,7 @@ repo --name=yanex-disk --baseurl=http://dist.yandex.ru/repo.yandex.ru/yandex-dis
 repo --name=yandex-browser --baseurl=http://repo.yandex.ru/yandex-browser/rpm/beta/$basearch
 repo --name=dropbox --baseurl=http://linux.dropbox.com/fedora/24/
 repo --name virtualbox --baseurl=http://download.virtualbox.org/virtualbox/rpm/fedora/24/$basearch
+repo --name skype-stable --baseurl=https://repo.skype.com/rpm/stable/
 
 %include spin-kickstarts/fedora-live-workstation.ks
 %include rfremix-live-base-ru_RU.ks
@@ -37,6 +38,7 @@ rpmdevtools
 rpmlint
 shutter
 skype
+skypeforlinux
 telegram-desktop
 unrar
 viber
@@ -153,6 +155,14 @@ enabled=1
 gpgcheck=1
 repo_gpgcheck=0
 gpgkey=https://www.virtualbox.org/download/oracle_vbox.asc
+FOE
+
+cat > /etc/yum.repos.d/skype-stable.repo << FOE
+name=skype (stable)
+baseurl=https://repo.skype.com/rpm/stable/
+enabled=1
+gpgcheck=1
+gpgkey=https://repo.skype.com/data/SKYPE-GPG-KEY
 FOE
 
 cat >> /etc/rc.d/init.d/livesys << EOF
