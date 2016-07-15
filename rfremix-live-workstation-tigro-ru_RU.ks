@@ -22,6 +22,7 @@ timezone Europe/Moscow
 %packages
 -transmission*
 
+chrome-gnome-shell
 chromium
 chromium-pepper-flash
 deluge
