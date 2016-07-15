@@ -30,6 +30,7 @@ deluge
 empathy
 gimp
 gparted
+koji
 libappindicator-gtk3
 mock-configs-rfremix
 mpv
