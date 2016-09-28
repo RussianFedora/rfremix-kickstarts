@@ -6,7 +6,7 @@
 usage()
 {
   echo
-  echo "Create RFRemix Live images based on Fedora 24 package base"
+  echo "Create RFRemix Live images based on Fedora 25 package base"
   echo "from internet."
   echo
   echo "create-live <imagename> <i686|x86_64|all> <version> <release> [--scratch]"
@@ -130,12 +130,8 @@ do
             koji spin-livecd $SCRATCH --release $BUILD --skip-tag --noprogress RFRemix-Live-$spin-$ARCH $RELEASE --nowait \
                 --repo=http://repos.russianfedora.pro/dist-rfr$VERSION-devel-build/latest/$BASEARCH/ \
                 --repo=http://dl.fedoraproject.org/pub/fedora/linux/updates/$VERSION/$BASEARCH/ \
-                --repo=http://mirror.yandex.ru/fedora/rpmfusion/free/fedora/releases/22/Everything/$BASEARCH/os/ \
-                --repo=http://mirror.yandex.ru/fedora/rpmfusion/free/fedora/updates/22/$BASEARCH/ \
-                --repo=http://mirror.yandex.ru/fedora/rpmfusion/free/fedora/updates/testing/23/$BASEARCH/ \
-                --repo=http://mirror.yandex.ru/fedora/rpmfusion/nonfree/fedora/releases/22/Everything/$BASEARCH/os/ \
-                --repo=http://mirror.yandex.ru/fedora/rpmfusion/nonfree/fedora/updates/22/$BASEARCH/ \
-                --repo=http://mirror.yandex.ru/fedora/rpmfusion/nonfree/fedora/updates/testing/23/$BASEARCH/ \
+                --repo=http://mirror.yandex.ru/fedora/rpmfusion/free/fedora/development/$VERSION/Everything/$BASEARCH/os/
+                --repo=http://mirror.yandex.ru/fedora/rpmfusion/nonfree/fedora/development/$VERSION/Everything/$BASEARCH/os/
                 --repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/branding/fedora/development/$VERSION/$BASEARCH/os \
                 --repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/fixes/fedora/development/$VERSION/$BASEARCH/os \
                 --repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/free/fedora/development/$VERSION/$BASEARCH/os \
