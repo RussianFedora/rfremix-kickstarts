@@ -81,7 +81,7 @@ fi
 VERSION=$(echo $RELEASE | awk -F[_.-] '{ print $1 }')
 
 KSEXTRAARGS="-v F21"
-DEVEL=""
+DEVEL="-devel"
 
 if [ "$VERSION" == "rawhide" ]; then
 TARGET=rawhide
@@ -130,8 +130,8 @@ do
             koji spin-livecd $SCRATCH --release $BUILD --skip-tag --noprogress RFRemix-Live-$spin-$ARCH $RELEASE --nowait \
                 --repo=http://repos.russianfedora.pro/dist-rfr$VERSION-devel-build/latest/$BASEARCH/ \
                 --repo=http://dl.fedoraproject.org/pub/fedora/linux/updates/$VERSION/$BASEARCH/ \
-                --repo=http://mirror.yandex.ru/fedora/rpmfusion/free/fedora/development/$VERSION/Everything/$BASEARCH/os/
-                --repo=http://mirror.yandex.ru/fedora/rpmfusion/nonfree/fedora/development/$VERSION/Everything/$BASEARCH/os/
+                --repo=http://mirror.yandex.ru/fedora/rpmfusion/free/fedora/development/$VERSION/Everything/$BASEARCH/os/ \
+                --repo=http://mirror.yandex.ru/fedora/rpmfusion/nonfree/fedora/development/$VERSION/Everything/$BASEARCH/os/ \
                 --repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/branding/fedora/development/$VERSION/$BASEARCH/os \
                 --repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/fixes/fedora/development/$VERSION/$BASEARCH/os \
                 --repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/free/fedora/development/$VERSION/$BASEARCH/os \
