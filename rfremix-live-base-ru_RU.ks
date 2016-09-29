@@ -77,6 +77,9 @@ russianfedora-branding-release
 # vpn for Beeline
 NetworkManager-l2tp
 
+-libcrypt
+libcrypt-nss
+
 %end
 
 %post
