@@ -47,7 +47,7 @@ vim-enhanced
 xchat
 
 # proprietary
-VirtualBox-5.0
+VirtualBox-5.1
 google-chrome-stable
 mail.ru-cloud
 nautilus-dropbox
