@@ -46,31 +46,35 @@ LOGFILE="$BUILDDIR/logs/build-$(date +%Y%m%d%H%M).log"
 
 case "$1" in
   -c)
-    DIST="Live-Cinnamon"
+    DIST="Cinnamon-Live"
     CONFIG="$CONFIGPATH/rfremix-live-cinnamon-ru_RU.ks"
     ;;
   -w)
-    DIST="Live-Workstation"
+    DIST="Workstation-Live"
     CONFIG="$CONFIGPATH/rfremix-live-workstation-ru_RU.ks"
     ;;
+  -t)
+    DIST="Workstation-Live-Tigro"
+    CONFIG="$CONFIGPATH/rfremix-live-workstation-tigro-ru_RU.ks"
+    ;;
   -k)
-    DIST=("Live-KDE")
+    DIST=("KDE-Live")
     CONFIG=("$CONFIGPATH/rfremix-live-kde-ru_RU.ks")
     ;;
   -x)
-    DIST=("Live-XFCE")
+    DIST=("XFCE-Live")
     CONFIG=("$CONFIGPATH/rfremix-live-xfce-ru_RU.ks")
     ;;
   -l)
-    DIST=("Live-LXDE")
+    DIST=("LXDE-Live")
     CONFIG=("$CONFIGPATH/rfremix-live-lxde-ru_RU.ks")
     ;;
   -m)
-    DIST=("Live-MATE_Compiz")
+    DIST=("MATE_Compiz-Live")
     CONFIG=("$CONFIGPATH/rfremix-live-mate_compiz-ru_RU.ks")
     ;;
   -a)
-    DIST=("Live-Workstation" "Live-KDE" "Live-XFCE" "Live-LXDE" "Live-MATE_Compiz" "Live-Cinnamon")
+    DIST=("Workstation-Live" "KDE-Live" "XFCE-Live" "LXDE-Live" "MATE_Compiz-Live" "Cinnamon-Live")
     CONFIG=("$CONFIGPATH/rfremix-live-workstation-ru_RU.ks"
             "$CONFIGPATH/rfremix-live-kde-ru_RU.ks"
             "$CONFIGPATH/rfremix-live-xfce-ru_RU.ks"
@@ -139,7 +143,7 @@ for arch in $ARCH; do
     echo -n "Creating RFRemix-${DIST[i]}-$arch-$version.iso "
 
     setarch $arch livecd-creator -v -d -t $BUILDDIR/tmp --cache=$BUILDDIR/tmp \
-        -f $LABEL --releasever=$releasever --product=RFRemix --title="RFRemix Live" -c ${CONFIG[i]} >> $LOGFILE 2>&1 && \
+        -f $LABEL --releasever=$releasever --product=RFRemix --title="RFRemix-$DIST $releasever" -c ${CONFIG[i]} >> $LOGFILE 2>&1 && \
       if [ "$LABEL.iso" != "RFRemix-${DIST[i]}-$arch-$version.iso" ]; then
         mv $LABEL.iso RFRemix-${DIST[i]}-$arch-$version.iso; fi && \
       sha256sum RFRemix-${DIST[i]}-$arch-$version.iso > \
