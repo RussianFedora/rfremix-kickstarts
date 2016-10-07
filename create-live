@@ -143,7 +143,7 @@ for arch in $ARCH; do
     echo -n "Creating RFRemix-${DIST[i]}-$arch-$version.iso "
 
     setarch $arch livecd-creator -v -d -t $BUILDDIR/tmp --cache=$BUILDDIR/tmp \
-        -f $LABEL --releasever=$releasever --product=RFRemix --title="RFRemix-$DIST $releasever" -c ${CONFIG[i]} >> $LOGFILE 2>&1 && \
+        -f $LABEL --releasever=$releasever --product="RFRemix-$DIST $releasever" --title="RFRemix-$DIST $releasever" -c ${CONFIG[i]} >> $LOGFILE 2>&1 && \
       if [ "$LABEL.iso" != "RFRemix-${DIST[i]}-$arch-$version.iso" ]; then
         mv $LABEL.iso RFRemix-${DIST[i]}-$arch-$version.iso; fi && \
       sha256sum RFRemix-${DIST[i]}-$arch-$version.iso > \
