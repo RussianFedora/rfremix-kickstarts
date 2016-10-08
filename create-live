@@ -150,10 +150,10 @@ for arch in $ARCH; do
 	--iso-name=RFRemix-$DIST-$arch-$version.iso \
 	--logfile=/result/logs/RFRemix-$DIST-$arch-$version.log \
 	--ks=${CONFIG[i]} > /dev/null 2>&1 && \
-	cd /result/RFRemix-$DIST-$arch-$version/ && \
+	pushd /result/RFRemix-$DIST-$arch-$version/ > /dev/null && \
 	sha256sum RFRemix-${DIST[i]}-$arch-$version.iso > \
 	RFRemix-${DIST[i]}-$arch-$version-CHECKSUM && \
-	cd - && ok || fail
+	popd > /dev/null && ok || fail
   done
 done
 
