@@ -135,19 +135,34 @@ for arch in $ARCH; do
       exit 10
     fi
 
-    rm -f RFRemix-${DIST[i]}-$arch-$version.iso
-    rm -f RFRemix-${DIST[i]}-$arch-$version-CHECKSUM
+#   rm -f RFRemix-${DIST[i]}-$arch-$version.iso
+#   rm -f RFRemix-${DIST[i]}-$arch-$version-CHECKSUM
 
-    LABEL=$(echo RFRemix-${DIST[i]}-$arch-$version.iso | sed 's!\.iso!!g' | cut -b 1-32)
+#   LABEL=$(echo RFRemix-${DIST[i]}-$arch-$version.iso | sed 's!\.iso!!g' | cut -b 1-32)
 
     echo -n "Creating RFRemix-${DIST[i]}-$arch-$version.iso "
 
-    setarch $arch livecd-creator -v -d -t $BUILDDIR/tmp --cache=$BUILDDIR/tmp \
-        -f $LABEL --releasever=$releasever --product="RFRemix-$DIST $releasever" --title="RFRemix-$DIST $releasever" -c ${CONFIG[i]} >> $LOGFILE 2>&1 && \
-      if [ "$LABEL.iso" != "RFRemix-${DIST[i]}-$arch-$version.iso" ]; then
-        mv $LABEL.iso RFRemix-${DIST[i]}-$arch-$version.iso; fi && \
-      sha256sum RFRemix-${DIST[i]}-$arch-$version.iso > \
-        RFRemix-${DIST[i]}-$arch-$version-CHECKSUM && ok || fail
+    livemedia-creator \
+	--tmp=/tmp \
+	--resultdir=/result \
+	--releasever=25 \
+	--project=RFRemix-$DIST \
+	--title=RFRemix-$DIST \
+	--volid=RFRemix-$DIST-$releasever \
+	--make-iso \
+	--no-virt \
+	--macboot \
+	--iso-only \
+	--iso-name=RFRemix-$DIST-$arch-$version.iso \
+	--ks=/rfremix-kickstart/${CONFIG[i]} && ok || fail
+
+
+#    setarch $arch livecd-creator -v -d -t $BUILDDIR/tmp --cache=$BUILDDIR/tmp \
+#        -f $LABEL --releasever=$releasever --product="RFRemix-$DIST $releasever" --title="RFRemix-$DIST $releasever" -c ${CONFIG[i]} >> $LOGFILE 2>&1 && \
+#      if [ "$LABEL.iso" != "RFRemix-${DIST[i]}-$arch-$version.iso" ]; then
+#        mv $LABEL.iso RFRemix-${DIST[i]}-$arch-$version.iso; fi && \
+#      sha256sum RFRemix-${DIST[i]}-$arch-$version.iso > \
+#        RFRemix-${DIST[i]}-$arch-$version-CHECKSUM && ok || fail
   done
 done
 
