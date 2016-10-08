@@ -154,7 +154,7 @@ for arch in $ARCH; do
 	--macboot \
 	--iso-only \
 	--iso-name=RFRemix-$DIST-$arch-$version.iso \
-	--ks=/rfremix-kickstart/${CONFIG[i]} && ok || fail
+	--ks=${CONFIG[i]} && ok || fail
 
 
 #    setarch $arch livecd-creator -v -d -t $BUILDDIR/tmp --cache=$BUILDDIR/tmp \
