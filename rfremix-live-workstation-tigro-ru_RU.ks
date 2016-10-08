@@ -159,6 +159,7 @@ gpgkey=https://www.virtualbox.org/download/oracle_vbox.asc
 FOE
 
 cat > /etc/yum.repos.d/skype-stable.repo << FOE
+[skype-linux]
 name=skype (stable)
 baseurl=https://repo.skype.com/rpm/stable/
 enabled=1
