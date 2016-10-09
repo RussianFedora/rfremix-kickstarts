@@ -44,7 +44,7 @@ fi
 
 BUILDDIR="$(pwd)"
 CONFIGPATH="$BUILDDIR"
-LOGFILE="$BUILDDIR/logs/build-$(date +%Y%m%d%H%M).log"
+LOGFILE="/var/log/build-$(date +%Y%m%d%H%M).log"
 
 case "$1" in
   -c)
@@ -149,7 +149,7 @@ for arch in $ARCH; do
 	--iso-only \
 	--iso-name=RFRemix-$DIST-$arch-$version.iso \
 	--logfile=/result/logs/RFRemix-$DIST-$arch-$version.log \
-	--ks=${CONFIG[i]} > /dev/null 2>&1 && \
+	--ks=${CONFIG[i]} >> $LOGFILE 2>&1 && \
 	pushd /result/RFRemix-$DIST-$arch-$version/ > /dev/null && \
 	sha256sum RFRemix-${DIST[i]}-$arch-$version.iso > \
 	RFRemix-${DIST[i]}-$arch-$version-CHECKSUM && \
