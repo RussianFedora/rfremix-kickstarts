@@ -22,28 +22,28 @@ usage()
 
 case "$1" in
   -c)
-    SPINS="Cinnamon"
+    SPINS="Cinnamon-Live"
     ;;
   -w)
-    SPINS="Workstation"
+    SPINS="Workstation-Live"
     ;;
   -t)
-    SPINS="Workstation-Tigro"
+    SPINS="Workstation-Live-Tigro"
     ;;
   -k)
-    SPINS="KDE"
+    SPINS="KDE-Live"
     ;;
   -x)
-    SPINS="XFCE"
+    SPINS="XFCE-Live"
     ;;
   -l)
-    SPINS="LXDE"
+    SPINS="LXDE-Live"
     ;;
   -m)
-    SPINS="MATE_Compiz"
+    SPINS="MATE_Compiz-Live"
     ;;
   -a)
-    SPINS="Workstation KDE XFCE LXDE MATE_Compiz Cinnamon"
+    SPINS="Workstation-Live KDE-Live XFCE-Live LXDE-Live MATE_Compiz-Live Cinnamon-Live"
     ;;
   *)
     usage
@@ -80,7 +80,7 @@ fi
 
 VERSION=$(echo $RELEASE | awk -F[_.-] '{ print $1 }')
 
-KSEXTRAARGS="-v F21"
+KSEXTRAARGS="-v F24"
 DEVEL="-devel"
 
 if [ "$VERSION" == "rawhide" ]; then
@@ -102,7 +102,7 @@ for spin in $SPINS
 do
     # added external repo
     declare -l lspin
-    lspin=$spin
+    lspin=$(echo $spin | sed 's@-Live@@g')
     for ARCH in $ARCHES
     do
        if [[ $ARCH == i686 ]]
@@ -111,7 +111,6 @@ do
        fi
 
        ksflatten $KSEXTRAARGS -c rfremix-live-$lspin-ru_RU.ks -o rfremix-live-$lspin-$GITHASH-$DATE-ru_RU-$BASEARCH.ks >& /dev/null
-
        if [ "x$spin" == "xWorkstation-Tigro" ]; then
             EXTERNAL_PARAM="--repo=http://dl.google.com/linux/chrome/rpm/stable/x86_64
 		--repo=https://linuxdesktopcloud.mail.ru/rpm/Fedora/default
@@ -127,7 +126,8 @@ do
 
 
         if [ "x$DEVEL" != "x" ]; then
-            koji spin-livecd $SCRATCH --release $BUILD --skip-tag --noprogress RFRemix-Live-$spin-$ARCH $RELEASE --nowait \
+            koji spin-livemedia $SCRATCH --release $BUILD --skip-tag --noprogress RFRemix-$spin $RELEASE --nowait \
+		--title=RFRemix-$spin-$ARCH \
                 --repo=http://repos.russianfedora.pro/dist-rfr$VERSION-devel-build/latest/$BASEARCH/ \
                 --repo=http://dl.fedoraproject.org/pub/fedora/linux/updates/$VERSION/$BASEARCH/ \
                 --repo=http://mirror.yandex.ru/fedora/rpmfusion/free/fedora/development/$VERSION/Everything/$BASEARCH/os/ \
