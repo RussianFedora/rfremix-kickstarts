@@ -149,11 +149,15 @@ for arch in $ARCH; do
 	--iso-only \
 	--iso-name=RFRemix-$DIST-$arch-$version.iso \
 	--logfile=/result/logs/RFRemix-$DIST-$arch-$version.log \
-	--ks=${CONFIG[i]} >> $LOGFILE 2>&1 && \
-	pushd /result/RFRemix-$DIST-$arch-$version/ > /dev/null && \
-	sha256sum RFRemix-${DIST[i]}-$arch-$version.iso > \
-	RFRemix-${DIST[i]}-$arch-$version-CHECKSUM && \
-	popd > /dev/null && ok || fail
+	--ks=${CONFIG[i]} >> $LOGFILE 2>&1 
+
+	if [ $? -eq 0 ]; then
+            sha256sum /result/RFRemix-$DIST-$arch-$version/RFRemix-${DIST[i]}-$arch-$version.iso | \
+		awk -F"[ /]" '{ print $1"  "$NF }' > RFRemix-${DIST[i]}-$arch-$version-CHECKSUM
+		ok
+	else
+	    fail
+	fi
   done
 done
 
