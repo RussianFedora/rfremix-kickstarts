@@ -132,13 +132,13 @@ for arch in $ARCH; do
       exit 10
     fi
 
-    rm -rf /result/RFRemix-$DIST-$arch-$version
+    rm -rf result/RFRemix-$DIST-$arch-$version
 
     echo -n "Creating RFRemix-${DIST[i]}-$arch-$version.iso "
 
     setarch $arch livemedia-creator \
 	--tmp=/tmp \
-	--resultdir=/result/RFRemix-$DIST-$arch-$version \
+	--resultdir=result/RFRemix-$DIST-$arch-$version \
 	--releasever=25 \
 	--project=RFRemix-$DIST \
 	--title=RFRemix-$DIST \
@@ -148,11 +148,11 @@ for arch in $ARCH; do
 	--macboot \
 	--iso-only \
 	--iso-name=RFRemix-$DIST-$arch-$version.iso \
-	--logfile=/result/logs/RFRemix-$DIST-$arch-$version.log \
+	--logfile=result/logs/RFRemix-$DIST-$arch-$version.log \
 	--ks=${CONFIG[i]} >> $LOGFILE 2>&1 
 
 	if [ $? -eq 0 ]; then
-            sha256sum /result/RFRemix-$DIST-$arch-$version/RFRemix-${DIST[i]}-$arch-$version.iso | \
+            sha256sum result/RFRemix-$DIST-$arch-$version/RFRemix-${DIST[i]}-$arch-$version.iso | \
 		awk -F"[ /]" '{ print $1"  "$NF }' > RFRemix-${DIST[i]}-$arch-$version-CHECKSUM
 		ok
 	else
