@@ -4,7 +4,7 @@ Create RFRemix Live Images
 Cloning
 =======
 
-* git clone -b f23/master --recursive git://github.com/Tigro/spin-kickstarts-rfremix.git
+* git clone -b f25/master --recurse-submodules git://github.com/RussianFedora/rfremix-kickstarts.git
 
 Building Live Images
 ====================
@@ -12,7 +12,7 @@ Building Live Images
 ```
 sudo ./create-live 
 
-Create RFRemix Live images based on Fedora 23 package base
+Create RFRemix Live images based on Fedora 25 package base
 from internet.
 
 create-live <imagename> <i686|x86_64|all> <version>
@@ -32,12 +32,12 @@ Building Install Images
 XZ_DEFAULTS=--memlimit-compress=3700MiB /usr/bin/pungi \
 	-c rfremix-install-workstation.ks \
 	--installpkgs fedora-productimg-workstation \
-	--ver 23 --variant Workstation --family RFRemix
+	--ver 25 --variant Workstation --family RFRemix
 ```
 
 ```
 XZ_DEFAULTS=--memlimit-compress=3700MiB /usr/bin/pungi \
 	-c rfremix-install-server.ks \
 	--installpkgs fedora-productimg-server \
-	--ver 23 --variant Server --family RFRemix
+	--ver 25 --variant Server --family RFRemix
 ```
