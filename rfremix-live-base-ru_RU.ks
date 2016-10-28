@@ -1,7 +1,7 @@
 # include Russian Fedora and RPMFusion repos
 %include rfremix-repo-not-rawhide.ks
 
-url --url="http://dl.fedoraproject.org/pub/fedora/linux/development/25/Everything/$basearch/os/"
+url --url="http://repos.russianfedora.pro/dist-rfr25-tree-devel-build/latest/$basearch/"
 
 # Fonts and input methods for Russia
 
