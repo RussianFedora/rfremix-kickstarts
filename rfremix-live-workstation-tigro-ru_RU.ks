@@ -26,6 +26,7 @@ timezone Europe/Moscow
 chrome-gnome-shell
 chromium
 chromium-pepper-flash
+corebird
 deluge
 empathy
 gimp
