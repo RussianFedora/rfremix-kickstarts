@@ -122,23 +122,25 @@ enabled=1
 FOE
 
 cat > /etc/yum.repos.d/yandex-disk.repo << FOE
-[yandex]
-name=Yandex
+[yandex-disk]
+name=Yandex Disk
 failovermethod=priority
 baseurl=http://dist.yandex.ru/repo.yandex.ru/yandex-disk/rpm/stable/\$basearch/
 enabled=1
 metadata_expire=1d
 gpgcheck=1
 gpgkey=http://dist.yandex.ru/repo.yandex.ru/yandex-disk/YANDEX-DISK-KEY.GPG
+skip_if_unavailable=1
 FOE
 
 cat > /etc/yum.repos.d/yandex-browser.repo << FOE
 [yandex-browser]
-name=yandex-browser
+name=Yandex Browser
 baseurl=http://repo.yandex.ru/yandex-browser/rpm/beta/x86_64
 enabled=1
 gpgcheck=1
 gpgkey=https://repo.yandex.ru/yandex-browser/YANDEX-BROWSER-KEY.GPG
+skip_if_unavailable=1
 FOE
 
 cat > /etc/yum.repos.d/dropbox.repo << FOE
