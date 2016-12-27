@@ -41,6 +41,7 @@ shutter
 skype
 skypeforlinux
 telegram-desktop
+terminix
 unrar
 viber
 vim-enhanced
