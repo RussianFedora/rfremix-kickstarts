@@ -81,7 +81,7 @@ fi
 VERSION=$(echo $RELEASE | awk -F[_.-] '{ print $1 }')
 
 KSEXTRAARGS="-v F24"
-DEVEL="-devel"
+#DEVEL="-devel"
 
 if [ "$VERSION" == "rawhide" ]; then
 TARGET=rawhide
@@ -110,15 +110,16 @@ do
     fi
 
     ksflatten $KSEXTRAARGS -c rfremix-live-$lspin-ru_RU.ks -o rfremix-live-$lspin-$GITHASH-$DATE-ru_RU.ks >& /dev/null
-    if [ "x$spin" == "xWorkstation-Tigro" ]; then
-         EXTERNAL_PARAM="--repo=http://dl.google.com/linux/chrome/rpm/stable/x86_64
-     	--repo=https://linuxdesktopcloud.mail.ru/rpm/Fedora/default
-     	--repo=http://dist.yandex.ru/repo.yandex.ru/yandex-disk/rpm/stable/x86_64/
-     	--repo=http://repo.yandex.ru/yandex-browser/rpm/beta/x86_64
-     	--repo=http://linux.dropbox.com/fedora/24/
-     	--repo=http://download.virtualbox.org/virtualbox/rpm/fedora/24/x86_64
-     	--repo=http://repos.russianfedora.pro/dist-rfr$VERSION-build/latest/i386/
-     	--repo=http://fedora.uib.no/fedora/linux/updates/$VERSION/i386/"
+    if [ "x$spin" == "xWorkstation-Live-Tigro" ]; then
+         EXTERNAL_PARAM="
+             --repo=http://dl.google.com/linux/chrome/rpm/stable/x86_64
+             --repo=https://linuxdesktopcloud.mail.ru/rpm/Fedora/default
+             --repo=https://repo.yandex.ru/yandex-disk/rpm/stable/x86_64
+             --repo=https://repo.yandex.ru/yandex-browser/rpm/beta/x86_64
+             --repo=http://linux.dropbox.com/fedora/25
+             --repo=http://download.virtualbox.org/virtualbox/rpm/fedora/25/x86_64
+             --repo=https://repo.skype.com/rpm/stable
+             --repo=http://repos.russianfedora.pro/dist-rfr$VERSION-build/latest/i386/"
     else
          unset EXTERNAL_PARAM
     fi
@@ -140,22 +141,23 @@ do
 
      else
          koji spin-livemedia $SCRATCH --release $BUILD --skip-tag --noprogress RFRemix-$spin $RELEASE --nowait \
-             --repo=http://repos.russianfedora.pro/dist-rfr$VERSION-build/latest/$basearch/ \
+	     --title=RFRemix-$spin \
+             --repo=http://repos.russianfedora.pro/dist-rfr$VERSION-tree-build/latest/\$basearch/ \
              --repo=http://dl.fedoraproject.org/pub/fedora/linux/updates/$VERSION/\$basearch/ \
-             --repo=http://mirror.yandex.ru/fedora/rpmfusion/free/fedora/releases/$VERSION/Everything/$basearch/os/ \
-             --repo=http://mirror.yandex.ru/fedora/rpmfusion/nonfree/fedora/releases/$VERSION/Everything/$basearch/os/ \
-             --repo=http://mirror.yandex.ru/fedora/rpmfusion/free/fedora/updates/$VERSION/$basearch/ \
-             --repo=http://mirror.yandex.ru/fedora/rpmfusion/nonfree/fedora/updates/$VERSION/$basearch/ \
-             --repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/branding/fedora/releases/$VERSION/Everything/$basearch/os \
-             --repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/branding/fedora/updates/$VERSION/$basearch \
-             --repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/fixes/fedora/releases/$VERSION/Everything/$basearch/os \
-             --repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/fixes/fedora/updates/$VERSION/$basearch \
-             --repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/free/fedora/releases/$VERSION/Everything/$basearch/os \
-             --repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/free/fedora/updates/$VERSION/$basearch \
-             --repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/nonfree/fedora/releases/$VERSION/Everything/$basearch/os \
-             --repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/nonfree/fedora/updates/$VERSION/$basearch \
+             --repo=http://mirror.yandex.ru/fedora/rpmfusion/free/fedora/releases/$VERSION/Everything/\$basearch/os/ \
+             --repo=http://mirror.yandex.ru/fedora/rpmfusion/nonfree/fedora/releases/$VERSION/Everything/\$basearch/os/ \
+             --repo=http://mirror.yandex.ru/fedora/rpmfusion/free/fedora/updates/$VERSION/\$basearch/ \
+             --repo=http://mirror.yandex.ru/fedora/rpmfusion/nonfree/fedora/updates/$VERSION/\$basearch/ \
+             --repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/branding/fedora/releases/$VERSION/Everything/\$basearch/os \
+             --repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/branding/fedora/updates/$VERSION/\$basearch \
+             --repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/fixes/fedora/releases/$VERSION/Everything/\$basearch/os \
+             --repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/fixes/fedora/updates/$VERSION/\$basearch \
+             --repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/free/fedora/releases/$VERSION/Everything/\$basearch/os \
+             --repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/free/fedora/updates/$VERSION/\$basearch \
+             --repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/nonfree/fedora/releases/$VERSION/Everything/\$basearch/os \
+             --repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/nonfree/fedora/updates/$VERSION/\$basearch \
              $EXTERNAL_PARAM $TARGET $ARCHES rfremix-live-$lspin-$GITHASH-$DATE-ru_RU.ks
-         rm -f rfremix-live-$lspin-$GITHASH-$DATE-ru_RU-$BASEARCH.ks
+         rm -f rfremix-live-$lspin-$GITHASH-$DATE-ru_RU.ks
     fi
 done
 
