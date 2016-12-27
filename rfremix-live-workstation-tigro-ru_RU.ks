@@ -72,7 +72,7 @@ FOE
 # change firefox to chromium
 cat >> /usr/share/glib-2.0/schemas/org.gnome.shell.gschema.override << FOE
 [org.gnome.shell]
-favorite-apps=['chromium-browser.desktop', 'evolution.desktop', 'rhythmbox.desktop', 'shotwell.desktop', 'org.gnome.Nautilus.desktop', 'org.gnome.Software.desktop']
+favorite-apps=['chromium-browser.desktop', 'evolution.desktop', 'rhythmbox.desktop', 'empathy.desktop', 'shotwell.desktop', 'org.gnome.Nautilus.desktop', 'org.gnome.Software.desktop', 'gnome-tweak-tool.desktop', 'shutter.desktop', 'com.gexperts.Terminix.desktop', 'org.baedert.corebird.desktop']
 FOE
 
 glib-compile-schemas /usr/share/glib-2.0/schemas
@@ -181,7 +181,7 @@ FOE
 
 sed -i '/firefox.desktop/d' /usr/share/glib-2.0/schemas/org.gnome.shell.gschema.override
 sed -i \
-  "s@favorite-apps=.*@favorite-apps=['chromium-browser.desktop', 'evolution.desktop', 'rhythmbox.desktop', 'shotwell.desktop', 'org.gnome.Nautilus.desktop', 'anaconda.desktop']@g" \
+  "s@favorite-apps=.*@favorite-apps=['chromium-browser.desktop', 'evolution.desktop', 'rhythmbox.desktop', 'empathy.desktop', 'shotwell.desktop', 'org.gnome.Nautilus.desktop', 'org.gnome.Software.desktop', 'gnome-tweak-tool.desktop', 'shutter.desktop', 'com.gexperts.Terminix.desktop', 'org.baedert.corebird.desktop' 'anaconda.desktop']@g" \
   /usr/share/glib-2.0/schemas/org.gnome.shell.gschema.override
 
 glib-compile-schemas /usr/share/glib-2.0/schemas
