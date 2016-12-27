@@ -30,6 +30,7 @@ corebird
 deluge
 empathy
 gimp
+gnome-packagekit-common
 gparted
 koji
 libappindicator-gtk3
