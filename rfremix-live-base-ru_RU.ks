@@ -37,6 +37,9 @@ gstreamer1-plugins-ugly
 # yes many peoples love flash
 flash-plugin
 
+# messangers
+telegram-desktop
+
 # should be to feel better
 bash-completion
 fpaste
