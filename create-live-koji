@@ -6,7 +6,7 @@
 usage()
 {
   echo
-  echo "Create RFRemix Live images based on Fedora 25 package base"
+  echo "Create RFRemix Live images based on Fedora 26 package base"
   echo "from internet."
   echo
   echo "create-live <imagename> <i686|x86_64|all> <version> <release> [--scratch]"
@@ -81,7 +81,7 @@ fi
 VERSION=$(echo $RELEASE | awk -F[_.-] '{ print $1 }')
 
 KSEXTRAARGS="-v F24"
-#DEVEL="-devel"
+DEVEL="-devel"
 
 if [ "$VERSION" == "rawhide" ]; then
 TARGET=rawhide
@@ -130,8 +130,8 @@ do
 	     --title=RFRemix-$spin \
              --repo=http://repos.russianfedora.pro/dist-rfr$VERSION-devel-build/latest/\$basearch/ \
              --repo=http://dl.fedoraproject.org/pub/fedora/linux/updates/$VERSION/\$basearch/ \
-             --repo=http://mirror.yandex.ru/fedora/rpmfusion/free/fedora/development/$VERSION/Everything/\$basearch/os/ \
-             --repo=http://mirror.yandex.ru/fedora/rpmfusion/nonfree/fedora/development/$VERSION/Everything/\$basearch/os/ \
+             --repo=http://koji.rpmfusion.org/repos/f$VERSION-free-build/latest/\$basearch/ \
+             --repo=http://koji.rpmfusion.org/repos/f$VERSION-nonfree-build/latest/\$basearch/ \
              --repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/branding/fedora/development/$VERSION/\$basearch/os \
              --repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/fixes/fedora/development/$VERSION/\$basearch/os \
              --repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/free/fedora/development/$VERSION/\$basearch/os \
