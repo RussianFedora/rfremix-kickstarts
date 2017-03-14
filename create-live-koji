@@ -124,41 +124,11 @@ do
          unset EXTERNAL_PARAM
     fi
 
-
-     if [ "x$DEVEL" != "x" ]; then
-         koji spin-livemedia $SCRATCH --release $BUILD --skip-tag --noprogress RFRemix-$spin $RELEASE --nowait \
-	     --title=RFRemix-$spin \
-             --repo=http://repos.russianfedora.pro/dist-rfr$VERSION-devel-build/latest/\$basearch/ \
-             --repo=http://dl.fedoraproject.org/pub/fedora/linux/updates/$VERSION/\$basearch/ \
-             --repo=http://mirror.yandex.ru/fedora/rpmfusion/free/fedora/development/$VERSION/Everything/\$basearch/os/ \
-             --repo=http://mirror.yandex.ru/fedora/rpmfusion/nonfree/fedora/development/$VERSION/Everything/\$basearch/os/ \
-             --repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/branding/fedora/development/$VERSION/\$basearch/os \
-             --repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/fixes/fedora/development/$VERSION/\$basearch/os \
-             --repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/free/fedora/development/$VERSION/\$basearch/os \
-             --repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/nonfree/fedora/development/$VERSION/\$basearch/os \
-             $EXTERNAL_PARAM $TARGET $ARCHES rfremix-live-$lspin-$GITHASH-$DATE-ru_RU.ks
-         rm -f rfremix-live-$lspin-$GITHASH-$DATE-ru_RU.ks
-
-     else
-         koji spin-livemedia $SCRATCH --release $BUILD --skip-tag --noprogress RFRemix-$spin $RELEASE --nowait \
-	     --title=RFRemix-$spin \
-             --repo=http://repos.russianfedora.pro/dist-rfr$VERSION-tree-build/latest/\$basearch/ \
-             --repo=http://dl.fedoraproject.org/pub/fedora/linux/updates/$VERSION/\$basearch/ \
-             --repo=http://mirror.yandex.ru/fedora/rpmfusion/free/fedora/releases/$VERSION/Everything/\$basearch/os/ \
-             --repo=http://mirror.yandex.ru/fedora/rpmfusion/nonfree/fedora/releases/$VERSION/Everything/\$basearch/os/ \
-             --repo=http://mirror.yandex.ru/fedora/rpmfusion/free/fedora/updates/$VERSION/\$basearch/ \
-             --repo=http://mirror.yandex.ru/fedora/rpmfusion/nonfree/fedora/updates/$VERSION/\$basearch/ \
-             --repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/branding/fedora/releases/$VERSION/Everything/\$basearch/os \
-             --repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/branding/fedora/updates/$VERSION/\$basearch \
-             --repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/fixes/fedora/releases/$VERSION/Everything/\$basearch/os \
-             --repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/fixes/fedora/updates/$VERSION/\$basearch \
-             --repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/free/fedora/releases/$VERSION/Everything/\$basearch/os \
-             --repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/free/fedora/updates/$VERSION/\$basearch \
-             --repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/nonfree/fedora/releases/$VERSION/Everything/\$basearch/os \
-             --repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/nonfree/fedora/updates/$VERSION/\$basearch \
-             $EXTERNAL_PARAM $TARGET $ARCHES rfremix-live-$lspin-$GITHASH-$DATE-ru_RU.ks
-         rm -f rfremix-live-$lspin-$GITHASH-$DATE-ru_RU.ks
-    fi
+    koji spin-livemedia $SCRATCH --release $BUILD --skip-tag --noprogress RFRemix-$spin $RELEASE --nowait \
+        --title=RFRemix-$spin \
+        --repo=http://mirror.yandex.ru/fedora/russianfedora/build/$VERSION/\$basearch/ \
+        $EXTERNAL_PARAM $TARGET $ARCHES rfremix-live-$lspin-$GITHASH-$DATE-ru_RU.ks
+    rm -f rfremix-live-$lspin-$GITHASH-$DATE-ru_RU.ks
 done
 
 mv spin-kickstarts/fedora-repo-not-rawhide.ks.orig spin-kickstarts/fedora-repo-not-rawhide.ks
