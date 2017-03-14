@@ -7,7 +7,7 @@ repo --name=google-chrome --baseurl=http://dl.google.com/linux/chrome/rpm/stable
 repo --name=mailru --baseurl=https://linuxdesktopcloud.mail.ru/rpm/Fedora/default
 repo --name=yanex-disk --baseurl=https://repo.yandex.ru/yandex-disk/rpm/stable/$basearch/
 repo --name=yandex-browser --baseurl=https://repo.yandex.ru/yandex-browser/rpm/beta/x86_64
-repo --name=dropbox --baseurl=http://linux.dropbox.com/fedora/24/
+repo --name=dropbox --baseurl=http://linux.dropbox.com/fedora/25/
 repo --name virtualbox --baseurl=http://download.virtualbox.org/virtualbox/rpm/fedora/24/$basearch
 repo --name skype-stable --baseurl=https://repo.skype.com/rpm/stable/
 
@@ -148,7 +148,7 @@ FOE
 cat > /etc/yum.repos.d/dropbox.repo << FOE
 [Dropbox]
 name=Dropbox Repository
-baseurl=http://linux.dropbox.com/fedora/24/
+baseurl=http://linux.dropbox.com/fedora/25/
 gpgkey=https://linux.dropbox.com/fedora/rpm-public-key.asc
 skip_if_unavailable=1
 FOE
