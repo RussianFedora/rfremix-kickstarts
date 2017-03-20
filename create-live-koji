@@ -9,7 +9,7 @@ usage()
   echo "Create RFRemix Live images based on Fedora 26 package base"
   echo "from internet."
   echo
-  echo "create-live <imagename> <i686|x86_64|all> <version> <release> [--scratch]"
+  echo "create-live-koji <imagename> <i686|x86_64|all> <version> <release> [--scratch]"
   echo "	-c - Cinnamon LiveCD"
   echo "	-w - Workstation (with GNOME) LiveCD"
   echo "	-k - KDE LiveCD"
@@ -67,6 +67,11 @@ esac
 
 RELEASE=$3
 BUILD=$4
+
+if [ "$BUILD" == "daily" ]; then
+    BUILD="$(date +%Y%m%d.n.0)"
+fi
+
 SCRATCH=$5
 
 if [ "x$SCRATCH" != "x" -a "x$SCRATCH" != "x--scratch" ]; then
