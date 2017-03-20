@@ -7,7 +7,7 @@ export LC_ALL=en_US.UTF-8
 usage()
 {
   echo
-  echo "Create RFRemix Live images based on Fedora 24 package base"
+  echo "Create RFRemix Live images based on Fedora 26 package base"
   echo "from internet."
   echo
   echo "create-live <imagename> <i686|x86_64|all> <version>"
@@ -139,7 +139,7 @@ for arch in $ARCH; do
     setarch $arch livemedia-creator \
 	--tmp=/tmp \
 	--resultdir=result/RFRemix-$DIST-$arch-$version \
-	--releasever=25 \
+	--releasever=26 \
 	--project=RFRemix-$DIST \
 	--title=RFRemix-$DIST \
 	--volid=RFRemix-$DIST-$releasever \
