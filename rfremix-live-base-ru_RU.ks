@@ -96,7 +96,4 @@ localectl set-x11-keymap us,ru pc105 , grp:alt_shift_toggle
 
 EOF
 
-# set SELinux to premissive during build
-sed 's@SELINUX=.*@SELINUX=permissive@g' /etc/sysconfig/selinux
-
 %end
