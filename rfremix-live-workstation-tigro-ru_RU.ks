@@ -29,6 +29,7 @@ chromium-pepper-flash
 corebird
 deluge
 empathy
+foo2zjs
 gimp
 gnome-packagekit-common
 gparted
@@ -42,6 +43,7 @@ rpmlint
 shutter
 skype
 skypeforlinux
+system-config-printer
 telegram-desktop
 tilix
 unrar
