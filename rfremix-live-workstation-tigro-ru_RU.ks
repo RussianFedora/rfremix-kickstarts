@@ -43,7 +43,7 @@ shutter
 skype
 skypeforlinux
 telegram-desktop
-terminix
+tilix
 unrar
 viber
 vim-enhanced
