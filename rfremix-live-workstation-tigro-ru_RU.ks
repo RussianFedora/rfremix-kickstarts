@@ -29,6 +29,7 @@ chromium-pepper-flash
 corebird
 deluge
 empathy
+epiphany
 foo2zjs
 gimp
 gnome-packagekit-common
