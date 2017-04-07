@@ -72,6 +72,11 @@ esac
 RELEASE=$3
 BUILD=$4
 
+if [ ! -x /usr/bin/ksflatten ]; then
+    echo "pykickstart package not installed"
+    exit 1
+fi
+
 if [ "$BUILD" == "daily" ]; then
     BUILD="$(date +%Y%m%d.n.0)"
 fi
