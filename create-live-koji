@@ -15,6 +15,7 @@ usage()
   echo "	-k - KDE LiveCD"
   echo "	-x - XFCE LiveCD"
   echo "	-l - LXDE LiveCD"
+  echo "	-q - LXQt LiveCD"
   echo "	-m - MATE LiveCD"
   echo "	-a - ALL Images"
   exit 2
@@ -39,11 +40,14 @@ case "$1" in
   -l)
     SPINS="LXDE-Live"
     ;;
+  -q)
+    SPINS="LXQt-Live"
+    ;;
   -m)
     SPINS="MATE_Compiz-Live"
     ;;
   -a)
-    SPINS="Workstation-Live KDE-Live XFCE-Live LXDE-Live MATE_Compiz-Live Cinnamon-Live"
+    SPINS="Workstation-Live KDE-Live XFCE-Live LXDE-Live LXQt-Live MATE_Compiz-Live Cinnamon-Live"
     ;;
   *)
     usage
@@ -124,7 +128,7 @@ do
              --repo=http://linux.dropbox.com/fedora/25
              --repo=http://download.virtualbox.org/virtualbox/rpm/fedora/25/x86_64
              --repo=https://repo.skype.com/rpm/stable
-             --repo=http://repos.russianfedora.pro/dist-rfr$VERSION-build/latest/i386/"
+             --repo=http://mirror.yandex.ru/fedora/russianfedora/build/$VERSION/i386/"
     else
          unset EXTERNAL_PARAM
     fi
