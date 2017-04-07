@@ -35,12 +35,12 @@ gparted
 koji
 libappindicator-gtk3
 mock-configs-rfremix
+mosh
 mpv
 rpm-build
 rpmdevtools
 rpmlint
-shutter
-skype
+#shutter
 skypeforlinux
 telegram-desktop
 terminix
