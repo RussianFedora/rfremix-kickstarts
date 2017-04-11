@@ -15,6 +15,7 @@ usage()
   echo "	-k - KDE LiveCD"
   echo "	-x - XFCE LiveCD"
   echo "	-l - LXDE LiveCD"
+  echo "	-q - LXQt LiveCD"
   echo "	-m - MATE LiveCD"
   echo "	-a - ALL Images"
   exit 2
@@ -39,11 +40,14 @@ case "$1" in
   -l)
     SPINS="LXDE-Live"
     ;;
+  -q)
+    SPINS="LXQt-Live"
+    ;;
   -m)
     SPINS="MATE_Compiz-Live"
     ;;
   -a)
-    SPINS="Workstation-Live KDE-Live XFCE-Live LXDE-Live MATE_Compiz-Live Cinnamon-Live"
+    SPINS="Workstation-Live KDE-Live XFCE-Live LXDE-Live LXQt-Live MATE_Compiz-Live Cinnamon-Live"
     ;;
   *)
     usage
@@ -81,6 +85,11 @@ fi
 
 if [ "x$RELEASE" == "x" -o "x$BUILD" == "x" ]; then
   usage
+fi
+
+if [ ! -x /usr/bin/ksflatten ]; then
+  echo "ksflatten not found. Please install pykickstart package."
+  exit 1
 fi
 
 VERSION=$(echo $RELEASE | awk -F[_.-] '{ print $1 }')
