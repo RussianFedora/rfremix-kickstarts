@@ -37,6 +37,9 @@ gstreamer1-plugins-ugly
 # yes many peoples love flash
 flash-plugin
 
+# to mount exfat
+fuse-exfat
+
 # messangers
 telegram-desktop
 
