@@ -92,6 +92,11 @@ if [ "x$RELEASE" == "x" -o "x$BUILD" == "x" ]; then
   usage
 fi
 
+if [ ! -x /usr/bin/ksflatten ]; then
+  echo "ksflatten not found. Please install pykickstart package."
+  exit 1
+fi
+
 VERSION=$(echo $RELEASE | awk -F[_.-] '{ print $1 }')
 
 KSEXTRAARGS="-v F24"
