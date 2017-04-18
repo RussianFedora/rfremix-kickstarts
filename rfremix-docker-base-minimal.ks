@@ -1,4 +1,4 @@
-# rfremix-docker-base.ks
+# rfremix-docker-base-minimal.ks
 #
 # Maintainer(s):
 # - Arkady L. Shane <ashejn [AT] russianfedora [DOT] pro>
