@@ -13,7 +13,8 @@ rfremix-release
 %post --erroronfail --log=/root/anaconda-post.log
 echo "Import RPM GPG key"
 releasever=$(rpm -q --qf '%{version}\n' rfremix-release)
-rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-$releasever-primary
+basearch=$(uname -i)
+rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-$releasever-$basearch
 rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-russianfedora-*
 rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-rpmfusion-*-$releasever
 %end
