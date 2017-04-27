@@ -15,7 +15,6 @@
 echo "Import RPM GPG key"
 releasever=$(rpm -q --qf '%{version}\n' rfremix-release)
 basearch=$(uname -i)
-rpm --import /etc/pkii/rpm-gpg/RPM-GPG-KEY-fedora-$releasever-$basearch
 rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-russianfedora-*
 rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-rpmfusion-*-$releasever
 %end
