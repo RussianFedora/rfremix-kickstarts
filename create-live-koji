@@ -9,7 +9,7 @@ usage()
   echo "Create RFRemix Live images based on Fedora 26 package base"
   echo "from internet."
   echo
-  echo "create-live-koji <imagename> <i686|x86_64|all> <version> <release> [--scratch]"
+  echo "create-live-koji <imagename> <i686|x86_64|all> <version> <release> [--scratch|--ksurl]"
   echo "	-c 		- Cinnamon LiveCD"
   echo "	-w 		- Workstation (with GNOME) LiveCD"
   echo "	-k 		- KDE LiveCD"
@@ -99,11 +99,6 @@ fi
 
 SCRATCH=$5
 
-if [ "x$SCRATCH" != "x" -a "x$SCRATCH" != "x--scratch" ]; then
-  echo "Unknown parameter $SCRATCH"
-  usage
-fi
-
 if [ "x$RELEASE" == "x" -o "x$BUILD" == "x" ]; then
   usage
 fi
@@ -114,6 +109,16 @@ if [ ! -x /usr/bin/ksflatten ]; then
 fi
 
 VERSION=$(echo $RELEASE | awk -F[_.-] '{ print $1 }')
+
+if [ "x$SCRATCH" == "x--ksurl" ]; then
+    LAST_COMMIT="$(git ls-remote https://github.com/RussianFedora/rfremix-kickstarts.git refs/heads/f$VERSION/ksurl | awk '{ print $1 }')"
+    SCRATCH="--ksurl=git://github.com/RussianFedora/rfremix-kickstarts.git?#$LAST_COMMIT"
+elif [ "x$SCRATCH" == "x--scratch" ]; then
+    true
+else
+  echo "Unknown parameter $SCRATCH"
+  usage
+fi
 
 KSEXTRAARGS="-v F24"
 DEVEL="-devel"
@@ -145,19 +150,24 @@ do
     fi
 
     if [ "$spin" == "Docker-Base" ]; then
-	ksflatten $KSEXTRAARGS -c rfremix-docker-base.ks -o rfremix-docker-base-$GITHASH-$DATE-ru_RU.ks >& /dev/null
-	sed -i 's@fedora-release@rfremix-release@g' rfremix-docker-base-$GITHASH-$DATE-ru_RU.ks
+	ksflatten $KSEXTRAARGS -c rfremix-docker-base.ks -o rfremix-docker-base-$GITHASH-$DATE.ks >& /dev/null
+	sed -i 's@fedora-release@rfremix-release@g' rfremix-docker-base-$GITHASH-$DATE.ks
 
 	koji image-build RFRemix-$spin $RELEASE --distro Fedora-22 dist-rfr26-devel \
 	    http://mirror.yandex.ru/fedora/russianfedora/build/$VERSION/\$basearch/ \
 	    $(echo $ARCHES | sed 's@,@ @g') \
 	    --release $BUILD $SCRATCH --nowait --disk-size=5 --format=docker \
-	    --kickstart=rfremix-docker-base-$GITHASH-$DATE-ru_RU.ks
-	rm -f rfremix-docker-base-$GITHASH-$DATE-ru_RU.ks
+	    if [ "x$SCRATCH" == "x--scratch" ]; then
+	        --kickstart=rfremix-docker-base-$GITHASH-$DATE-ru_RU.ks
+	    else
+	        --kickstart=rfremix-docker-base.ks
+            fi
+
+	rm -f rfremix-docker-base-$GITHASH-$DATE.ks
 
     elif [ "$spin" == "Cloud-Base" ]; then
-	ksflatten $KSEXTRAARGS -c rfremix-cloud-base.ks -o rfremix-cloud-base-$GITHASH-$DATE-ru_RU.ks >& /dev/null
-	sed -i 's@fedora-release@rfremix-release@g' rfremix-cloud-base-$GITHASH-$DATE-ru_RU.ks
+	ksflatten $KSEXTRAARGS -c rfremix-cloud-base.ks -o rfremix-cloud-base-$GITHASH-$DATE.ks >& /dev/null
+	sed -i 's@fedora-release@rfremix-release@g' rfremix-cloud-base-$GITHASH-$DATE.ks
 
 	koji image-build RFRemix-$spin $RELEASE --distro Fedora-22 dist-rfr26-devel \
 	    http://mirror.yandex.ru/fedora/russianfedora/build/$VERSION/\$arch/ \
@@ -166,12 +176,16 @@ do
 	    --format=qcow2 \
 	    --format=raw-xz \
 	    --format=tar-gz \
-	    --kickstart=rfremix-cloud-base-$GITHASH-$DATE-ru_RU.ks
-	rm -f rfremix-cloud-base-$GITHASH-$DATE-ru_RU.ks
+	    if [ "x$SCRATCH" == "x--scratch" ]; then
+	        --kickstart=rfremix-cloud-base-$GITHASH-$DATE.ks
+	    else
+	        --kickstart=rfremix-cloud-base.ks
+            fi
+	rm -f rfremix-cloud-base-$GITHASH-$DATE.ks
 
 elif [ "$spin" == "Cloud-Base-Vagrant" ]; then
-	ksflatten $KSEXTRAARGS -c rfremix-cloud-base-vagrant.ks -o rfremix-cloud-base-vagrant-$GITHASH-$DATE-ru_RU.ks >& /dev/null
-	sed -i 's@fedora-release@rfremix-release@g' rfremix-cloud-base-vagrant-$GITHASH-$DATE-ru_RU.ks
+	ksflatten $KSEXTRAARGS -c rfremix-cloud-base-vagrant.ks -o rfremix-cloud-base-vagrant-$GITHASH-$DATE.ks >& /dev/null
+	sed -i 's@fedora-release@rfremix-release@g' rfremix-cloud-base-vagrant-$GITHASH-$DATE.ks
 
 	koji image-build RFRemix-$spin $RELEASE --distro Fedora-22 dist-rfr26-devel \
 	    http://mirror.yandex.ru/fedora/russianfedora/build/$VERSION/\$arch/ \
@@ -179,8 +193,13 @@ elif [ "$spin" == "Cloud-Base-Vagrant" ]; then
 	    --release $BUILD $SCRATCH --nowait --disk-size=40 \
 	    --format=vagrant-virtualbox \
 	    --format=vagrant-libvir \
-	    --kickstart=rfremix-cloud-base-vagrant-$GITHASH-$DATE-ru_RU.ks
-	rm -f rfremix-cloud-base-vagrant-$GITHASH-$DATE-ru_RU.ks
+	    if [ "x$SCRATCH" == "x--scratch" ]; then
+	        --kickstart=rfremix-cloud-base-vagrant-$GITHASH-$DATE.ks
+	    else
+	        --kickstart=rfremix-cloud-base-vagrant.ks
+            fi
+
+	rm -f rfremix-cloud-base-vagrant-$GITHASH-$DATE.ks
 
     else
         ksflatten $KSEXTRAARGS -c rfremix-live-$lspin-ru_RU.ks -o rfremix-live-$lspin-$GITHASH-$DATE-ru_RU.ks >& /dev/null
