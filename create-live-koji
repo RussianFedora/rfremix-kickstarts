@@ -149,20 +149,22 @@ do
       else BASEARCH=$ARCH
     fi
 
+    if [ "x$SCRATCH" == "x--scratch" ]; then
+        KICKSTART="--kickstart=rfremix-$lspin-$GITHASH-$DATE.ks"
+    else
+	KICKSTART="--kickstart=rfremix-$lspin.ks"
+    fi
+
+
     if [ "$spin" == "Docker-Base" ]; then
 	ksflatten $KSEXTRAARGS -c rfremix-docker-base.ks -o rfremix-docker-base-$GITHASH-$DATE.ks >& /dev/null
 	sed -i 's@fedora-release@rfremix-release@g' rfremix-docker-base-$GITHASH-$DATE.ks
 
 	koji image-build RFRemix-$spin $RELEASE --distro Fedora-22 dist-rfr26-devel \
-	    http://mirror.yandex.ru/fedora/russianfedora/build/$VERSION/\$basearch/ \
+	    http://mirror.yandex.ru/fedora/russianfedora/build/$VERSION/\$arch/ \
 	    $(echo $ARCHES | sed 's@,@ @g') \
 	    --release $BUILD $SCRATCH --nowait --disk-size=5 --format=docker \
-	    if [ "x$SCRATCH" == "x--scratch" ]; then
-	        --kickstart=rfremix-docker-base-$GITHASH-$DATE-ru_RU.ks
-	    else
-	        --kickstart=rfremix-docker-base.ks
-            fi
-
+	    $KICKSTART
 	rm -f rfremix-docker-base-$GITHASH-$DATE.ks
 
     elif [ "$spin" == "Cloud-Base" ]; then
@@ -176,14 +178,10 @@ do
 	    --format=qcow2 \
 	    --format=raw-xz \
 	    --format=tar-gz \
-	    if [ "x$SCRATCH" == "x--scratch" ]; then
-	        --kickstart=rfremix-cloud-base-$GITHASH-$DATE.ks
-	    else
-	        --kickstart=rfremix-cloud-base.ks
-            fi
+	    $KICKSTART
 	rm -f rfremix-cloud-base-$GITHASH-$DATE.ks
 
-elif [ "$spin" == "Cloud-Base-Vagrant" ]; then
+    elif [ "$spin" == "Cloud-Base-Vagrant" ]; then
 	ksflatten $KSEXTRAARGS -c rfremix-cloud-base-vagrant.ks -o rfremix-cloud-base-vagrant-$GITHASH-$DATE.ks >& /dev/null
 	sed -i 's@fedora-release@rfremix-release@g' rfremix-cloud-base-vagrant-$GITHASH-$DATE.ks
 
@@ -193,11 +191,7 @@ elif [ "$spin" == "Cloud-Base-Vagrant" ]; then
 	    --release $BUILD $SCRATCH --nowait --disk-size=40 \
 	    --format=vagrant-virtualbox \
 	    --format=vagrant-libvir \
-	    if [ "x$SCRATCH" == "x--scratch" ]; then
-	        --kickstart=rfremix-cloud-base-vagrant-$GITHASH-$DATE.ks
-	    else
-	        --kickstart=rfremix-cloud-base-vagrant.ks
-            fi
+	    $KICKSTART
 
 	rm -f rfremix-cloud-base-vagrant-$GITHASH-$DATE.ks
 
