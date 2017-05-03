@@ -1,0 +1,210 @@
+#!/bin/bash
+
+# Copyright (C) 2013 Red Hat Inc.
+# SPDX-License-Identifier:	GPL-2.0+
+
+usage()
+{
+  echo
+  echo "Create RFRemix Live images based on Fedora 26 package base"
+  echo "from internet."
+  echo
+  echo "create-live-koji <imagename> <i686|x86_64|all> <version> <release> [--scratch]"
+  echo "	-c 		- Cinnamon LiveCD"
+  echo "	-w 		- Workstation (with GNOME) LiveCD"
+  echo "	-k 		- KDE LiveCD"
+  echo "	-x 		- XFCE LiveCD"
+  echo "	-l 		- LXDE LiveCD"
+  echo "	-q 		- LXQt LiveCD"
+  echo "	-m 		- MATE LiveCD"
+  echo "	-a 		- All Live Images"
+  echo
+  echo "  Cloud Images"
+  echo "	-cloud 		- Cloud Base Image"
+  echo "	-cloud-vagrant 	- Cloud Base Vagrant Image"
+  echo
+  echo "  Docker Image"
+  echo "	-docker 	- Docker Image"
+  exit 2
+}
+
+case "$1" in
+  -c)
+    SPINS="Cinnamon-Live"
+    ;;
+  -w)
+    SPINS="Workstation-Live"
+    ;;
+  -t)
+    SPINS="Workstation-Live-Tigro"
+    ;;
+  -k)
+    SPINS="KDE-Live"
+    ;;
+  -x)
+    SPINS="XFCE-Live"
+    ;;
+  -l)
+    SPINS="LXDE-Live"
+    ;;
+  -q)
+    SPINS="LXQt-Live"
+    ;;
+  -m)
+    SPINS="MATE_Compiz-Live"
+    ;;
+  -a)
+    SPINS="Workstation-Live KDE-Live XFCE-Live LXDE-Live LXQt-Live MATE_Compiz-Live Cinnamon-Live"
+    ;;
+  -cloud)
+    SPINS="Cloud-Base"
+    ;;
+  -cloud-vagrant)
+    SPINS="Cloud-Base-Vagrant"
+    ;;
+  -docker)
+    SPINS="Docker-Base"
+    ;;
+  *)
+    usage
+    ;;
+esac
+
+case "$2" in
+  all)
+    ARCHES="x86_64,i386"
+    ;;
+  i686)
+    ARCHES="i686"
+    ;;
+  x86_64)
+    ARCHES="x86_64"
+    ;;
+  *)
+    usage
+    ;;
+esac
+
+RELEASE=$3
+BUILD=$4
+
+if [ ! -x /usr/bin/ksflatten ]; then
+    echo "pykickstart package not installed"
+    exit 1
+fi
+
+if [ "$BUILD" == "daily" ]; then
+    BUILD="$(date +%Y%m%d.n.0)"
+fi
+
+SCRATCH=$5
+
+if [ "x$SCRATCH" != "x" -a "x$SCRATCH" != "x--scratch" ]; then
+  echo "Unknown parameter $SCRATCH"
+  usage
+fi
+
+if [ "x$RELEASE" == "x" -o "x$BUILD" == "x" ]; then
+  usage
+fi
+
+if [ ! -x /usr/bin/ksflatten ]; then
+  echo "ksflatten not found. Please install pykickstart package."
+  exit 1
+fi
+
+VERSION=$(echo $RELEASE | awk -F[_.-] '{ print $1 }')
+
+KSEXTRAARGS="-v F24"
+DEVEL="-devel"
+
+if [ "$VERSION" == "rawhide" ]; then
+TARGET=rawhide
+else
+TARGET=dist-rfr$VERSION$DEVEL
+fi
+
+GITHASH=$(git rev-parse --short HEAD)
+
+# drop url lines before build
+cp spin-kickstarts/fedora-repo-not-rawhide.ks spin-kickstarts/fedora-repo-not-rawhide.ks.orig
+sed -i '/^url/d' spin-kickstarts/fedora-repo-not-rawhide.ks
+
+# define current UNIX time
+DATE=$(date +%s)
+
+for spin in $SPINS
+do
+    # added external repo
+    declare -l lspin
+    lspin=$(echo $spin | sed 's@-Live@@g')
+
+    if [[ $ARCH == i686 ]]
+      then BASEARCH=i386
+      else BASEARCH=$ARCH
+    fi
+
+    if [ "$spin" == "Docker-Base" ]; then
+	ksflatten $KSEXTRAARGS -c rfremix-docker-base.ks -o rfremix-docker-base-$GITHASH-$DATE-ru_RU.ks >& /dev/null
+	sed -i 's@fedora-release@rfremix-release@g' rfremix-docker-base-$GITHASH-$DATE-ru_RU.ks
+
+	koji image-build RFRemix-$spin $RELEASE --distro Fedora-22 dist-rfr26-devel \
+	    http://mirror.yandex.ru/fedora/russianfedora/build/$VERSION/\$basearch/ \
+	    $(echo $ARCHES | sed 's@,@ @g') \
+	    --release $BUILD $SCRATCH --nowait --disk-size=5 --format=docker \
+	    --kickstart=rfremix-docker-base-$GITHASH-$DATE-ru_RU.ks
+	rm -f rfremix-docker-base-$GITHASH-$DATE-ru_RU.ks
+
+    elif [ "$spin" == "Cloud-Base" ]; then
+	ksflatten $KSEXTRAARGS -c rfremix-cloud-base.ks -o rfremix-cloud-base-$GITHASH-$DATE-ru_RU.ks >& /dev/null
+	sed -i 's@fedora-release@rfremix-release@g' rfremix-cloud-base-$GITHASH-$DATE-ru_RU.ks
+
+	koji image-build RFRemix-$spin $RELEASE --distro Fedora-22 dist-rfr26-devel \
+	    http://mirror.yandex.ru/fedora/russianfedora/build/$VERSION/\$arch/ \
+	    $(echo $ARCHES | sed 's@,@ @g') \
+	    --release $BUILD $SCRATCH --nowait --disk-size=4 \
+	    --format=qcow2 \
+	    --format=raw-xz \
+	    --format=tar-gz \
+	    --kickstart=rfremix-cloud-base-$GITHASH-$DATE-ru_RU.ks
+	rm -f rfremix-cloud-base-$GITHASH-$DATE-ru_RU.ks
+
+elif [ "$spin" == "Cloud-Base-Vagrant" ]; then
+	ksflatten $KSEXTRAARGS -c rfremix-cloud-base-vagrant.ks -o rfremix-cloud-base-vagrant-$GITHASH-$DATE-ru_RU.ks >& /dev/null
+	sed -i 's@fedora-release@rfremix-release@g' rfremix-cloud-base-vagrant-$GITHASH-$DATE-ru_RU.ks
+
+	koji image-build RFRemix-$spin $RELEASE --distro Fedora-22 dist-rfr26-devel \
+	    http://mirror.yandex.ru/fedora/russianfedora/build/$VERSION/\$arch/ \
+	    $(echo $ARCHES | sed 's@,@ @g') \
+	    --release $BUILD $SCRATCH --nowait --disk-size=40 \
+	    --format=vagrant-virtualbox \
+	    --format=vagrant-libvir \
+	    --kickstart=rfremix-cloud-base-vagrant-$GITHASH-$DATE-ru_RU.ks
+	rm -f rfremix-cloud-base-vagrant-$GITHASH-$DATE-ru_RU.ks
+
+    else
+        ksflatten $KSEXTRAARGS -c rfremix-live-$lspin-ru_RU.ks -o rfremix-live-$lspin-$GITHASH-$DATE-ru_RU.ks >& /dev/null
+
+    if [ "x$spin" == "xWorkstation-Live-Tigro" ]; then
+         EXTERNAL_PARAM="
+             --repo=http://dl.google.com/linux/chrome/rpm/stable/x86_64
+             --repo=https://linuxdesktopcloud.mail.ru/rpm/Fedora/default
+             --repo=https://repo.yandex.ru/yandex-disk/rpm/stable/x86_64
+             --repo=https://repo.yandex.ru/yandex-browser/rpm/beta/x86_64
+             --repo=http://linux.dropbox.com/fedora/25
+             --repo=http://download.virtualbox.org/virtualbox/rpm/fedora/25/x86_64
+             --repo=https://repo.skype.com/rpm/stable
+             --repo=http://mirror.yandex.ru/fedora/russianfedora/build/$VERSION/i386/"
+    else
+         unset EXTERNAL_PARAM
+    fi
+
+    koji spin-livemedia $SCRATCH --release $BUILD --skip-tag --noprogress RFRemix-$spin $RELEASE --nowait \
+        --title=RFRemix-$spin \
+        --repo=http://mirror.yandex.ru/fedora/russianfedora/build/$VERSION/\$basearch/ \
+        $EXTERNAL_PARAM $TARGET $ARCHES rfremix-live-$lspin-$GITHASH-$DATE-ru_RU.ks
+    rm -f rfremix-live-$lspin-$GITHASH-$DATE-ru_RU.ks
+    fi
+done
+
+mv spin-kickstarts/fedora-repo-not-rawhide.ks.orig spin-kickstarts/fedora-repo-not-rawhide.ks
