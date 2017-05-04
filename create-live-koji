@@ -162,7 +162,7 @@ do
 
 	koji image-build RFRemix-$spin $RELEASE --distro Fedora-22 dist-rfr26-devel \
 	    http://mirror.yandex.ru/fedora/russianfedora/build/$VERSION/\$arch/ \
-	    $(echo $ARCHES | sed 's@,@ @g') \
+	    x86_64 \
 	    --release $BUILD $SCRATCH --nowait --disk-size=5 --format=docker \
 	    $KICKSTART
 	rm -f rfremix-docker-base-$GITHASH-$DATE.ks
