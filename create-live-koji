@@ -190,7 +190,7 @@ do
 	    $(echo $ARCHES | sed 's@,@ @g') \
 	    --release $BUILD $SCRATCH --nowait --disk-size=40 \
 	    --format=vagrant-virtualbox \
-	    --format=vagrant-libvir \
+	    --format=vagrant-libvirt \
 	    $KICKSTART
 
 	rm -f rfremix-cloud-base-vagrant-$GITHASH-$DATE.ks
