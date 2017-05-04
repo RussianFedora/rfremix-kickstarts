@@ -158,7 +158,7 @@ do
 
     if [ "$spin" == "Docker-Base" ]; then
 	ksflatten $KSEXTRAARGS -c rfremix-docker-base.ks -o rfremix-docker-base-$GITHASH-$DATE.ks >& /dev/null
-	sed -i 's@fedora-release@rfremix-release@g' rfremix-docker-base-$GITHASH-$DATE.ks
+	sed -i 's@fedora-release)@rfremix-release)@g' rfremix-docker-base-$GITHASH-$DATE.ks
 
 	koji image-build RFRemix-$spin $RELEASE --distro Fedora-22 dist-rfr26-devel \
 	    http://mirror.yandex.ru/fedora/russianfedora/build/$VERSION/\$arch/ \
@@ -169,7 +169,7 @@ do
 
     elif [ "$spin" == "Cloud-Base" ]; then
 	ksflatten $KSEXTRAARGS -c rfremix-cloud-base.ks -o rfremix-cloud-base-$GITHASH-$DATE.ks >& /dev/null
-	sed -i 's@fedora-release@rfremix-release@g' rfremix-cloud-base-$GITHASH-$DATE.ks
+	sed -i 's@fedora-release)@rfremix-release)@g' rfremix-cloud-base-$GITHASH-$DATE.ks
 
 	koji image-build RFRemix-$spin $RELEASE --distro Fedora-22 dist-rfr26-devel \
 	    http://mirror.yandex.ru/fedora/russianfedora/build/$VERSION/\$arch/ \
@@ -183,7 +183,7 @@ do
 
     elif [ "$spin" == "Cloud-Base-Vagrant" ]; then
 	ksflatten $KSEXTRAARGS -c rfremix-cloud-base-vagrant.ks -o rfremix-cloud-base-vagrant-$GITHASH-$DATE.ks >& /dev/null
-	sed -i 's@fedora-release@rfremix-release@g' rfremix-cloud-base-vagrant-$GITHASH-$DATE.ks
+	sed -i 's@fedora-release)@rfremix-release)@g' rfremix-cloud-base-vagrant-$GITHASH-$DATE.ks
 
 	koji image-build RFRemix-$spin $RELEASE --distro Fedora-22 dist-rfr26-devel \
 	    http://mirror.yandex.ru/fedora/russianfedora/build/$VERSION/\$arch/ \
