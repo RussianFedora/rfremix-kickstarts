@@ -16,13 +16,9 @@
 pidgin
 hexchat
 transmission
-parole
 
 # mp3 support
 gstreamer1-plugin-mpg123
-
-# make sure we have a graphical installer
-gnome-software              # for update-notification
 
 # extra backgrounds
 desktop-backgrounds-basic
