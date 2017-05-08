@@ -13,3 +13,9 @@ timezone Europe/Moscow
 %packages
 gparted
 %end
+
+%post
+# Fix display on Desktop
+sed -i '/^Type=/d' /home/liveuser/Desktop/liveinst.desktop
+
+%end
