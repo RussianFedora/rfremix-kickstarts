@@ -58,6 +58,7 @@ wget
 
 # configuration
 rfremix-config
+rfremix-config-external-repos
 
 # repos
 rpmfusion-free-release
