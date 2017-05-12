@@ -20,6 +20,10 @@ kde-l10n-uk
 
 kde-partitionmanager
 
+@libreoffice
+-@kde-office
+okular
+
 # vpn for Beeline
 plasma-nm-l2tp
 
