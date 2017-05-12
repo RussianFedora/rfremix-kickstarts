@@ -49,6 +49,7 @@ tilix
 unrar
 viber
 vim-enhanced
+vinagre
 xchat
 
 # proprietary
