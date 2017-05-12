@@ -15,7 +15,16 @@ gparted
 %end
 
 %post
-# Fix display on Desktop
-sed -i '/^Type=/d' /home/liveuser/Desktop/liveinst.desktop
+# make the installer show up
+if [ -f /usr/share/applications/liveinst.desktop ]; then
+  # Fix display on Desktop
+  sed -i '/^Type=/d' /usr/share/applications/liveinst.desktop
+fi
+
+if [ ! -d /home/liveuser/Desktop ]; then
+    mkdir /home/liveuser/Desktop
+fi
+
+cp /usr/share/applications/liveinst.desktop /home/liveuser/Desktop/
 
 %end
