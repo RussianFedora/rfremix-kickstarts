@@ -28,13 +28,3 @@ okular
 plasma-nm-l2tp
 
 %end
-
-%post
-# make kdm russian
-if [ -f /etc/kde/kdm/kdmrc ]; then
-        if [ "\`echo \$LANG | awk -F_ '{print \$1}'\`" == "ru" ]; then
-                sed -i 's!#Language=de_DE!Language=ru_RU!' /etc/kde/kdm/kdmrc
-        fi
-fi
-
-%end
