@@ -24,7 +24,14 @@ kde-partitionmanager
 -@kde-office
 okular
 
+# kde theme for plymouth
+plymouth-theme-breeze
+
 # vpn for Beeline
 plasma-nm-l2tp
 
 %end
+
+%post
+kde theme for plymouth
+/usr/sbin/plymouth-set-default-theme breeze -R
