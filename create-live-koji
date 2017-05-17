@@ -115,8 +115,8 @@ if [ "x$SCRATCH" == "x--ksurl" ]; then
     SCRATCH="--ksurl=git://github.com/RussianFedora/rfremix-kickstarts.git?#$LAST_COMMIT"
 elif [ "x$SCRATCH" == "x--scratch" ]; then
     true
-else
-  echo "Unknown parameter $SCRATCH"
+elif [[ $(echo $SPINS | grep -v '\-Live') ]]; then
+  echo "Unknown or missing last parameter $SCRATCH"
   usage
 fi
 
