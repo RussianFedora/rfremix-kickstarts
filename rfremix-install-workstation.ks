@@ -32,7 +32,7 @@ repo --name=russianfedora-free-updates-source --mirrorlist=http://mirrors.rfremi
 repo --name=russianfedora-nonfree-source --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=nonfree-fedora-source-25&arch=$basearch
 repo --name=russianfedora-nonfree-updates-source --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=nonfree-fedora-updates-released-source-25&arch=$basearch
 
-%include spin-kickstarts/fedora-workstation-packages.ks
+%include spin-kickstarts/fedora-workstation-common.ks
 
 # Package manifest for the compose.  Uses repo group metadata to translate groups.
 # (default groups for the configured repos are added by --default)
