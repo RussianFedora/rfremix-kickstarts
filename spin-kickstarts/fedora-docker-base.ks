@@ -17,21 +17,23 @@ sssd-client
 
 # remove some extraneous files
 rm -rf /var/cache/dnf/*
-echo "Exit code l20: $?"
 rm -rf /tmp/*
-echo "Exit code l22: $?"
 
 #Mask mount units and getty service so that we don't get login prompt
 systemctl mask systemd-remount-fs.service dev-hugepages.mount sys-fs-fuse-connections.mount systemd-logind.service getty.target console-getty.service
-echo "Exit code l26: $?"
 
 # https://bugzilla.redhat.com/show_bug.cgi?id=1343138
 # Fix /run/lock breakage since it's not tmpfs in docker
 # This unmounts /run (tmpfs) and then recreates the files
 # in the /run directory on the root filesystem of the container
+#
+# We ignore the return code of the systemd-tmpfiles command because
+# at this point we have already removed the /etc/machine-id and all
+# tmpfiles lines with %m in them will fail and cause a bad return
+# code. Example failure:
+#   [/usr/lib/tmpfiles.d/systemd.conf:26] Failed to replace specifiers: /run/log/journal/%m
+#
 umount /run
-echo "Exit code l33: $?"
-systemd-tmpfiles --create --boot
-echo "Exit code l35: $?"
+systemd-tmpfiles --prefix=/run/ --prefix=/var/run/ --create --boot || true
 
 %end

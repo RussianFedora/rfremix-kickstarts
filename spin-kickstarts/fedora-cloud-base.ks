@@ -40,12 +40,9 @@ bootloader --timeout=1 --append="no_timer_check console=tty1 console=ttyS0,11520
 network --bootproto=dhcp --device=link --activate --onboot=on
 services --enabled=sshd,cloud-init,cloud-init-local,cloud-config,cloud-final
 
-# boot partitions are irrelevant as none of that content is taken into the final docker image
-# We will be able to move to autopart when new pykickstart lands which adds option for noswap/noboot (fixed upstream)
 zerombr
 clearpart --all
-part /boot/efi --fstype="vfat" --size=50
-part / --fstype ext4 --grow
+autopart --noboot --nohome --noswap --nolvm
 
 %include fedora-repo.ks
 
