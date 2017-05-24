@@ -35,3 +35,4 @@ plasma-nm-l2tp
 %post
 kde theme for plymouth
 /usr/sbin/plymouth-set-default-theme breeze -R
+%end
