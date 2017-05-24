@@ -156,9 +156,17 @@ do
     fi
 
     if [ "x$SCRATCH" == "x--scratch" ]; then
-        KICKSTART="--kickstart=rfremix-$lspin-$GITHASH-$DATE.ks"
+        if [ $(echo $lspin | grep -E "\-Cloud-|-Docker-") ]; then
+            KICKSTART="--kickstart=rfremix-$lspin-$GITHASH-$DATE.ks"
+        else
+            KICKSTART="rfemix-live-$lspin-$GITHASH-$DATE.ks"
+        fi
     else
-	KICKSTART="--kickstart=rfremix-$lspin.ks"
+        if [ $(echo $lspin | grep -E "\-Cloud-|-Docker-") ]; then
+            KICKSTART="--kickstart=rfremix-$lspin.ks"
+        else
+            KICKSTART="rfremix-live-$lspin-ru_RU.ks"
+        fi
     fi
 
 
@@ -216,6 +224,11 @@ do
              --repo=http://mirror.yandex.ru/fedora/russianfedora/build/$VERSION/i386/"
     else
          unset EXTERNAL_PARAM
+    fi
+
+
+    if [ "x$SCRATCH" != "x--scratch" ]; then
+	unset SCRATCH
     fi
 
     koji spin-livemedia $SCRATCH --release $BUILD --skip-tag --noprogress RFRemix-$spin $RELEASE --nowait \
