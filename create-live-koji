@@ -120,7 +120,6 @@ else
   usage
 fi
 
-KSEXTRAARGS="-v F24"
 DEVEL="-devel"
 
 if [ "$VERSION" == "rawhide" ]; then
@@ -157,7 +156,7 @@ do
 
 
     if [ "$spin" == "Docker-Base" ]; then
-	ksflatten $KSEXTRAARGS -c rfremix-docker-base.ks -o rfremix-docker-base-$GITHASH-$DATE.ks >& /dev/null
+	ksflatten -v F26 -c rfremix-docker-base.ks -o rfremix-docker-base-$GITHASH-$DATE.ks >& /dev/null
 	sed -i 's@fedora-release)@rfremix-release)@g' rfremix-docker-base-$GITHASH-$DATE.ks
 
 	koji image-build RFRemix-$spin $RELEASE --distro Fedora-22 dist-rfr26-devel \
@@ -168,7 +167,7 @@ do
 	rm -f rfremix-docker-base-$GITHASH-$DATE.ks
 
     elif [ "$spin" == "Cloud-Base" ]; then
-	ksflatten $KSEXTRAARGS -c rfremix-cloud-base.ks -o rfremix-cloud-base-$GITHASH-$DATE.ks >& /dev/null
+	ksflatten -v F26 -c rfremix-cloud-base.ks -o rfremix-cloud-base-$GITHASH-$DATE.ks >& /dev/null
 	sed -i 's@fedora-release)@rfremix-release)@g' rfremix-cloud-base-$GITHASH-$DATE.ks
 
 	koji image-build RFRemix-$spin $RELEASE --distro Fedora-22 dist-rfr26-devel \
@@ -182,7 +181,7 @@ do
 	rm -f rfremix-cloud-base-$GITHASH-$DATE.ks
 
     elif [ "$spin" == "Cloud-Base-Vagrant" ]; then
-	ksflatten $KSEXTRAARGS -c rfremix-cloud-base-vagrant.ks -o rfremix-cloud-base-vagrant-$GITHASH-$DATE.ks >& /dev/null
+	ksflatten -v F26 -c rfremix-cloud-base-vagrant.ks -o rfremix-cloud-base-vagrant-$GITHASH-$DATE.ks >& /dev/null
 	sed -i 's@fedora-release)@rfremix-release)@g' rfremix-cloud-base-vagrant-$GITHASH-$DATE.ks
 
 	koji image-build RFRemix-$spin $RELEASE --distro Fedora-22 dist-rfr26-devel \
@@ -196,7 +195,7 @@ do
 	rm -f rfremix-cloud-base-vagrant-$GITHASH-$DATE.ks
 
     else
-        ksflatten $KSEXTRAARGS -c rfremix-live-$lspin-ru_RU.ks -o rfremix-live-$lspin-$GITHASH-$DATE-ru_RU.ks >& /dev/null
+        ksflatten -v F21 -c rfremix-live-$lspin-ru_RU.ks -o rfremix-live-$lspin-$GITHASH-$DATE-ru_RU.ks >& /dev/null
 
     if [ "x$spin" == "xWorkstation-Live-Tigro" ]; then
          EXTERNAL_PARAM="
