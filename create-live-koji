@@ -54,7 +54,14 @@ case "$1" in
     SPINS="MATE_Compiz-Live"
     ;;
   -a)
-    SPINS="Workstation-Live KDE-Live XFCE-Live LXDE-Live LXQt-Live MATE_Compiz-Live Cinnamon-Live"
+    SPINS="Workstation-Live
+	   KDE-Live XFCE-Live
+	   LXDE-Live LXQt-Live
+	   MATE_Compiz-Live
+	   Cinnamon-Live
+	   Cloud-Base
+	   Cloud-Base-Vagrant
+	   Docker-Base"
     ;;
   -cloud)
     SPINS="Cloud-Base"
