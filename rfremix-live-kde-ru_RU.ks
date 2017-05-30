@@ -13,6 +13,7 @@ keyboard ru
 timezone Europe/Moscow
 
 %packages
+gparted
 -kde-i18n-Russian
 kde-l10n-ru
 kde-l10n-kk
