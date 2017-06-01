@@ -81,6 +81,9 @@ which
 #-kbd
 -uboot-tools
 -kernel
+# No need for plymouth. Also means anaconda won't put rhgb/quiet
+# on kernel command line
+-plymouth
 
 %end
 
@@ -232,7 +235,9 @@ rm -f /var/lib/rpm/__db*
 echo "Fixing SELinux contexts."
 touch /var/log/cron
 touch /var/log/boot.log
-/usr/sbin/fixfiles -R -a restore
+# ignore return code because UEFI systems with vfat filesystems
+# that don't support selinux will give us errors
+/usr/sbin/fixfiles -R -a restore || true
 
 echo "Zeroing out empty space."
 # This forces the filesystem to reclaim space from deleted files
@@ -256,9 +261,6 @@ touch /etc/machine-id
 # will try to use this information and may error:
 # https://bugs.launchpad.net/cloud-init/+bug/1670052
 truncate -s 0 /etc/resolv.conf
-
-# Disable rhgb/quiet: https://bugzilla.redhat.com/show_bug.cgi?id=510523
-sed -i 's/rhgb quiet//' /boot/grub2/grub.cfg
 
 %end
 
