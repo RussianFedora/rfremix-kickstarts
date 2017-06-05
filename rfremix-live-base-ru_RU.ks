@@ -98,6 +98,9 @@ cat >> /etc/rc.d/init.d/livesys << EOF
 # set system keymaps
 localectl set-x11-keymap us,ru pc105 , grp:alt_shift_toggle
 
+# do not start dnfdragora-updater on live
+rm -f /etc/xdg/autostart/org.mageia.dnfdragora-updater.desktop
+
 EOF
 
 %end
