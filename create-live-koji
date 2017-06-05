@@ -117,9 +117,12 @@ fi
 
 VERSION=$(echo $RELEASE | awk -F[_.-] '{ print $1 }')
 
+RF_KICK_GITURL="https://github.com/RussianFedora/rfremix-kickstarts.git"
+LAST_COMMIT="$(git ls-remote $RF_KICK_GITURL refs/heads/f$VERSION/ksurl | awk '{ print $1 }')"
+KSURL="--ksurl=git://github.com/RussianFedora/rfremix-kickstarts.git?#$LAST_COMMIT"
+
 if [ "x$SCRATCH" == "x--ksurl" ]; then
-    LAST_COMMIT="$(git ls-remote https://github.com/RussianFedora/rfremix-kickstarts.git refs/heads/f$VERSION/ksurl | awk '{ print $1 }')"
-    SCRATCH="--ksurl=git://github.com/RussianFedora/rfremix-kickstarts.git?#$LAST_COMMIT"
+    SCRATCH="$KSURL"
 elif [ "x$SCRATCH" == "x--scratch" ]; then
     true
 elif [[ $(echo $SPINS | grep -v '\-Live') ]]; then
@@ -156,22 +159,24 @@ do
     fi
 
     if [ "x$SCRATCH" == "x--scratch" ]; then
-        if [ $(echo $lspin | grep -E "\-Cloud-|-Docker-") ]; then
+	if [ $(echo $lspin | grep -E "cloud-|docker-") ]; then
             KICKSTART="--kickstart=rfremix-$lspin-$GITHASH-$DATE.ks"
         else
             KICKSTART="rfemix-live-$lspin-$GITHASH-$DATE.ks"
         fi
     else
-        if [ $(echo $lspin | grep -E "\-Cloud-|-Docker-") ]; then
+        if [ $(echo $lspin | grep -E "cloud-|docker-") ]; then
             KICKSTART="--kickstart=rfremix-$lspin.ks"
+            SCRATCH="$KSURL"
         else
             KICKSTART="rfremix-live-$lspin-ru_RU.ks"
+	    SCRATCH=""
         fi
     fi
 
-
     if [ "$spin" == "Docker-Base" ]; then
-	ksflatten -v F26 -c rfremix-docker-base.ks -o rfremix-docker-base-$GITHASH-$DATE.ks >& /dev/null
+	ksflatten -v F26 -c rfremix-docker-base.ks -o \
+		rfremix-docker-base-$GITHASH-$DATE.ks >& /dev/null
 	sed -i 's@fedora-release)@rfremix-release)@g' rfremix-docker-base-$GITHASH-$DATE.ks
 
 	koji image-build RFRemix-$spin $RELEASE --distro Fedora-22 dist-rfr26-devel \
@@ -182,7 +187,8 @@ do
 	rm -f rfremix-docker-base-$GITHASH-$DATE.ks
 
     elif [ "$spin" == "Cloud-Base" ]; then
-	ksflatten -v F26 -c rfremix-cloud-base.ks -o rfremix-cloud-base-$GITHASH-$DATE.ks >& /dev/null
+	ksflatten -v F26 -c rfremix-cloud-base.ks -o \
+		rfremix-cloud-base-$GITHASH-$DATE.ks >& /dev/null
 	sed -i 's@fedora-release)@rfremix-release)@g' rfremix-cloud-base-$GITHASH-$DATE.ks
 
 	koji image-build RFRemix-$spin $RELEASE --distro Fedora-22 dist-rfr26-devel \
@@ -196,7 +202,8 @@ do
 	rm -f rfremix-cloud-base-$GITHASH-$DATE.ks
 
     elif [ "$spin" == "Cloud-Base-Vagrant" ]; then
-	ksflatten -v F26 -c rfremix-cloud-base-vagrant.ks -o rfremix-cloud-base-vagrant-$GITHASH-$DATE.ks >& /dev/null
+	ksflatten -v F26 -c rfremix-cloud-base-vagrant.ks -o \
+		rfremix-cloud-base-vagrant-$GITHASH-$DATE.ks >& /dev/null
 	sed -i 's@fedora-release)@rfremix-release)@g' rfremix-cloud-base-vagrant-$GITHASH-$DATE.ks
 
 	koji image-build RFRemix-$spin $RELEASE --distro Fedora-22 dist-rfr26-devel \
@@ -210,7 +217,8 @@ do
 	rm -f rfremix-cloud-base-vagrant-$GITHASH-$DATE.ks
 
     else
-        ksflatten -v F21 -c rfremix-live-$lspin-ru_RU.ks -o rfremix-live-$lspin-$GITHASH-$DATE-ru_RU.ks >& /dev/null
+        ksflatten -v F21 -c rfremix-live-$lspin-ru_RU.ks -o \
+		rfremix-live-$lspin-$GITHASH-$DATE-ru_RU.ks >& /dev/null
 
     if [ "x$spin" == "xWorkstation-Live-Tigro" ]; then
          EXTERNAL_PARAM="
@@ -227,11 +235,8 @@ do
     fi
 
 
-    if [ "x$SCRATCH" != "x--scratch" ]; then
-	unset SCRATCH
-    fi
-
-    koji spin-livemedia $SCRATCH --release $BUILD --skip-tag --noprogress RFRemix-$spin $RELEASE --nowait \
+    koji spin-livemedia $SCRATCH --release $BUILD \
+	--skip-tag --noprogress RFRemix-$spin $RELEASE --nowait \
         --title=RFRemix-$spin \
         --repo=http://mirror.yandex.ru/fedora/russianfedora/build/$VERSION/\$basearch/ \
         $EXTERNAL_PARAM $TARGET $ARCHES rfremix-live-$lspin-$GITHASH-$DATE-ru_RU.ks
