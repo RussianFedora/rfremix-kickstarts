@@ -15,16 +15,7 @@ gparted
 %end
 
 %post
-# make the installer show up
-if [ -f /usr/share/applications/liveinst.desktop ]; then
-  # Fix display on Desktop
-  sed -i '/^Type=/d' /usr/share/applications/liveinst.desktop
-fi
-
-if [ ! -d /home/liveuser/Desktop ]; then
-    mkdir /home/liveuser/Desktop
-fi
-
-cp /usr/share/applications/liveinst.desktop /home/liveuser/Desktop/
+# Fix display Installer Icon on Desktop
+chmod +x /home/liveuser/Desktop/liveinst.desktop
 
 %end
