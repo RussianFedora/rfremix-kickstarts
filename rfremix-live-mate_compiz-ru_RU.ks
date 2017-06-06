@@ -15,7 +15,11 @@ gparted
 %end
 
 %post
+cat >> /etc/rc.d/init.d/livesys << EOF
+
 # Fix display Installer Icon on Desktop
 chmod +x /home/liveuser/Desktop/liveinst.desktop
+
+EOF
 
 %end
