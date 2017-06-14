@@ -45,6 +45,7 @@ rpmlint
 skypeforlinux
 system-config-printer
 telegram-desktop
+-gnome-terminal
 tilix
 unrar
 viber
