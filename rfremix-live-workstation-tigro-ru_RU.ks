@@ -32,6 +32,7 @@ epiphany
 foo2zjs
 gimp
 gnome-packagekit-common
+google-roboto-fonts
 gparted
 koji
 libappindicator-gtk3
