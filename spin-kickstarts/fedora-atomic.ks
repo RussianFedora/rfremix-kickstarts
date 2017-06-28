@@ -41,7 +41,7 @@ reboot
 # temporary "dev" repo url above. We want to change the remote
 # we use to match where the repo will live for the entirety of f26.
 ostree remote delete fedora-atomic
-ostree remote add --set=gpg-verify=false fedora-atomic 'https://kojipkgs.fedoraproject.org/atomic/26/'
+ostree remote add --set=gpg-verify=true --set=gpgkeypath=/etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-26-primary fedora-atomic 'https://kojipkgs.fedoraproject.org/atomic/26/'
 
 # older versions of livecd-tools do not follow "rootpw --lock" line above
 # https://bugzilla.redhat.com/show_bug.cgi?id=964299
