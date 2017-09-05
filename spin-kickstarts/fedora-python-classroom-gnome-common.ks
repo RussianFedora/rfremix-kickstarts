@@ -56,6 +56,7 @@ python3-pillow-tk
 
 # Dictionaries are big
 -aspell-*
+-hunspell-*
 -words
 
 # Help and art can be big, too

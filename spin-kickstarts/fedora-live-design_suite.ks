@@ -16,42 +16,25 @@ part / --size 14336
 # Switch to groups for design suite
 @design-suite
 
-# Added addons to address rhbz#1336879 from dnf
-gimp-data-extras
-gimp-dbp
-gimp-dds-plugin
-gimp-elsamuko
-gimp-fourier-plugin
-gimp-gap
-gimp-help
-gimp-high-pass-filter
-gimp-layer-via-copy-cut
-gimp-lensfun
-gimp-lqr-plugin
-gimp-normalmap
-gimp-paint-studio
-gimp-resynthesizer
-gimp-save-for-web
-gimp-separate+
-gimp-wavelet-denoise-plugin
-gimpfx-foundry
-gmic-gimp
-inkscape-psd
-inkscape-sozi
-inkscape-table
-sane-backends-drivers-scanners
-xsane-gimp
-#YafaRay-blender
+# Provides backup application
+deja-dup
+deja-dup-nautilus
 
 # Add extra gnome applications
 gnome-books
 gnome-calendar
 gnome-photos
+gnome-shell-extension-pomodoro
+gnome-todo
+
+# Add cosmetic for gnome-terminal
+powerline
+powerline-fonts
+
 
 # Extra wallpapers
 f26-backgrounds-extras-base
 f26-backgrounds-extras-gnome
-
 
 # removal of unneeded applications
 -gnome-boxes
@@ -64,7 +47,7 @@ f26-backgrounds-extras-gnome
 #Override the favorite desktop application in Dash
 cat >> /usr/share/glib-2.0/schemas/org.gnome.shell.gschema.override << FOE
 [org.gnome.shell]
-favorite-apps=['firefox.desktop', 'shotwell.desktop', 'gimp.desktop', 'darktable.desktop','krita', 'inkscape.desktop', 'blender.desktop', 'libreoffice-writer.desktop', 'scribus.desktop', 'nautilus.desktop', 'bijiben.desktop', 'anaconda.desktop', 'list-design-tutorials.desktop']
+favorite-apps=['firefox.desktop', 'shotwell.desktop', 'gimp.desktop', 'darktable.desktop','krita.desktop', 'inkscape.desktop', 'blender.desktop', 'libreoffice-writer.desktop', 'scribus.desktop', 'nautilus.desktop', 'bijiben.desktop', 'anaconda.desktop', 'list-design-tutorials.desktop']
 FOE
 
 # Add link to lists of tutorials

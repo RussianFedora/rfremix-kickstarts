@@ -14,10 +14,12 @@ sssd-client
 %end
 
 %post --erroronfail --log=/root/anaconda-post.log
-
 # remove some extraneous files
 rm -rf /var/cache/dnf/*
 rm -rf /tmp/*
+
+# https://pagure.io/atomic-wg/issue/308
+printf "tsflags=nodocs\n" >>/etc/dnf/dnf.conf
 
 #Mask mount units and getty service so that we don't get login prompt
 systemctl mask systemd-remount-fs.service dev-hugepages.mount sys-fs-fuse-connections.mount systemd-logind.service getty.target console-getty.service
@@ -35,5 +37,6 @@ systemctl mask systemd-remount-fs.service dev-hugepages.mount sys-fs-fuse-connec
 #
 umount /run
 systemd-tmpfiles --prefix=/run/ --prefix=/var/run/ --create --boot || true
+rm /run/nologin # https://pagure.io/atomic-wg/issue/316
 
 %end
