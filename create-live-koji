@@ -6,7 +6,7 @@
 usage()
 {
   echo
-  echo "Create RFRemix Live images based on Fedora 26 package base"
+  echo "Create RFRemix Live images based on Fedora 27 package base"
   echo "from internet."
   echo
   echo "create-live-koji <imagename> <i686|x86_64|all> <version> <release> [--scratch|--ksurl]"
@@ -179,7 +179,7 @@ do
 		rfremix-docker-base-$GITHASH-$DATE.ks >& /dev/null
 	sed -i 's@fedora-release)@rfremix-release)@g' rfremix-docker-base-$GITHASH-$DATE.ks
 
-	koji image-build RFRemix-$spin $RELEASE --distro Fedora-22 dist-rfr26-devel \
+	koji image-build RFRemix-$spin $RELEASE --distro Fedora-22 dist-rfr27-devel \
 	    http://mirror.yandex.ru/fedora/russianfedora/build/$VERSION/\$arch/ \
 	    x86_64 \
 	    --release $BUILD $SCRATCH --nowait --disk-size=5 --format=docker \
@@ -191,7 +191,7 @@ do
 		rfremix-cloud-base-$GITHASH-$DATE.ks >& /dev/null
 	sed -i 's@fedora-release)@rfremix-release)@g' rfremix-cloud-base-$GITHASH-$DATE.ks
 
-	koji image-build RFRemix-$spin $RELEASE --distro Fedora-22 dist-rfr26-devel \
+	koji image-build RFRemix-$spin $RELEASE --distro Fedora-22 dist-rfr27-devel \
 	    http://mirror.yandex.ru/fedora/russianfedora/build/$VERSION/\$arch/ \
 	    $(echo $ARCHES | sed 's@,@ @g') \
 	    --release $BUILD $SCRATCH --nowait --disk-size=4 \
@@ -206,7 +206,7 @@ do
 		rfremix-cloud-base-vagrant-$GITHASH-$DATE.ks >& /dev/null
 	sed -i 's@fedora-release)@rfremix-release)@g' rfremix-cloud-base-vagrant-$GITHASH-$DATE.ks
 
-	koji image-build RFRemix-$spin $RELEASE --distro Fedora-22 dist-rfr26-devel \
+	koji image-build RFRemix-$spin $RELEASE --distro Fedora-22 dist-rfr27-devel \
 	    http://mirror.yandex.ru/fedora/russianfedora/build/$VERSION/\$arch/ \
 	    $(echo $ARCHES | sed 's@,@ @g') \
 	    --release $BUILD $SCRATCH --nowait --disk-size=40 \
