@@ -89,6 +89,9 @@ NetworkManager-l2tp
 -libcrypt
 libcrypt-nss
 
+# workaround to install shim
+shim-x64
+
 %end
 
 %post
