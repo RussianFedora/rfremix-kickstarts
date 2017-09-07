@@ -42,7 +42,7 @@ mpv
 rpm-build
 rpmdevtools
 rpmlint
-#shutter
+shutter
 skypeforlinux
 system-config-printer
 telegram-desktop
