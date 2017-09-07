@@ -7,7 +7,7 @@ repo --name=google-chrome --baseurl=http://dl.google.com/linux/chrome/rpm/stable
 repo --name=mailru --baseurl=https://linuxdesktopcloud.mail.ru/rpm/Fedora/default
 repo --name=yanex-disk --baseurl=https://repo.yandex.ru/yandex-disk/rpm/stable/$basearch/
 repo --name=yandex-browser --baseurl=https://repo.yandex.ru/yandex-browser/rpm/beta/x86_64
-repo --name virtualbox --baseurl=http://download.virtualbox.org/virtualbox/rpm/fedora/24/$basearch
+repo --name virtualbox --baseurl=http://download.virtualbox.org/virtualbox/rpm/fedora/26/$basearch
 repo --name skype-stable --baseurl=https://repo.skype.com/rpm/stable/
 
 %include spin-kickstarts/fedora-live-workstation.ks
