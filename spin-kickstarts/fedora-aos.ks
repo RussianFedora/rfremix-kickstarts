@@ -86,7 +86,7 @@ iputils
 # Things it would be nice to loose
 -fedora-logos
 generic-logos
--rfremix-release-notes
+-fedora-release-notes
 %end
 
 #

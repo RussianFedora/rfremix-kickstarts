@@ -90,11 +90,13 @@ julia-doc
 
 # IDEs for the IDE folks
 @eclipse
-spyder
+#spyder
 
 #writing & publishing
-emacs
-emacs-color-theme
+# https://bugzilla.redhat.com/show_bug.cgi?id=1506888
+#emacs
+#emacs-color-theme
+
 vim
 scribus
 #scite

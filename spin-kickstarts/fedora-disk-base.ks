@@ -19,7 +19,7 @@ network --bootproto=dhcp --device=link --activate
 rootpw --lock --iscrypted locked
 shutdown
 
-bootloader --timeout=1 --append="no_timer_check console=tty1 console=ttyS0,115200n8"
+bootloader --timeout=1
 
 zerombr
 clearpart --all --initlabel --disklabel=msdos
@@ -80,6 +80,9 @@ rm -f /var/lib/rpm/__db*
 
 # remove random seed, the newly installed instance should make it's own
 rm -f /var/lib/systemd/random-seed
+
+# The enp1s0 interface is a left over from the imagefactory install, clean this up
+rm -f /etc/sysconfig/network-scripts/ifcfg-enp1s0
 
 dnf -y remove dracut-config-generic
 
