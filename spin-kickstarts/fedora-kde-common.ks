@@ -1,3 +1,4 @@
+
 %packages
 @firefox
 @kde-apps
@@ -18,7 +19,7 @@ qupzilla
 -system-config-printer
 # make sure mariadb lands instead of MySQL (hopefully a temporary hack)
 mariadb-embedded
-mariadb-libs
+mariadb-connector-c
 mariadb-server
 
 # minimal localization support - allows installing the kde-l10n-* packages
@@ -53,13 +54,6 @@ wqy-microhei-fonts			# a compact CJK font, to replace:
 
 -paratype-pt-sans-fonts	# Cyrillic (already supported by DejaVu), huge
 #-stix-fonts		# mathematical symbols
-
-# remove input methods to free space
--@input-methods
--scim*
--m17n*
--ibus*
--iok
 
 # admin-tools
 -gnome-disk-utility

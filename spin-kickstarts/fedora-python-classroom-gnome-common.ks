@@ -18,7 +18,6 @@ python3-pillow-tk
 -@sound-and-video
 -@multimedia
 -dleyna*
--evolution*
 -gnome-boxes
 -gnome-calendar
 -gnome-clocks
@@ -27,6 +26,7 @@ python3-pillow-tk
 -gnome-documents
 -gnome-font-viewer
 -gnome-maps
+-gnome-photos
 -gnome-weather
 -grilo-plugins
 -cheese
@@ -35,7 +35,6 @@ python3-pillow-tk
 
 # This is no longer workstation
 -@workstation-product
--fedora-productimg-workstation
 
 # Add a web browser
 @firefox
@@ -56,11 +55,11 @@ python3-pillow-tk
 
 # Dictionaries are big
 -aspell-*
--hunspell-*
 -words
 
 # Help and art can be big, too
 -gnome-user-docs
+-gnome-getting-started-docs
 -desktop-backgrounds-basic
 -*backgrounds-extras
 

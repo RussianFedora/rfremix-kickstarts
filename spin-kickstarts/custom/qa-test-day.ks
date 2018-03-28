@@ -43,7 +43,7 @@ selinux --permissive
 -deja-dup
 -evolution
 -evolution-ews
--rfremix-release-notes
+-fedora-release-notes
 -firewall-config
 -firstboot
 -gnome-backgrounds

@@ -32,13 +32,19 @@ autopart --noboot --nohome --noswap --nolvm
 %packages --excludedocs --instLangs=en --nocore
 rfremix-release
 bash
+coreutils-single
+glibc-minimal-langpack
+libcrypt
+rpm
+shadow-utils
+sssd-client
+util-linux
 -kernel
 -dosfstools
 -e2fsprogs
 -fuse-libs
 -gnupg2-smime
 -libss # used by e2fsprogs
--libusbx
 -pinentry
 -shared-mime-info
 -trousers
