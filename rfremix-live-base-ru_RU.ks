@@ -86,8 +86,6 @@ russianfedora-branding-release
 # vpn for Beeline
 NetworkManager-l2tp
 
--libcrypt
-
 # workaround to install shim
 shim-x64
 
