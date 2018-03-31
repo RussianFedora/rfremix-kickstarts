@@ -1,7 +1,7 @@
 # include Russian Fedora and RPMFusion repos
 %include rfremix-repo-not-rawhide.ks
 
-part / --size=8656
+part / --size=10656
 
 url --url="http://mirror.yandex.ru/fedora/russianfedora/build/28/$basearch/"
 
