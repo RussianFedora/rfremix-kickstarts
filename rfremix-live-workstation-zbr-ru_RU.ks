@@ -17,7 +17,7 @@ gparted
 libappindicator-gtk3
 tilix
 kmod-wl
-amod-wl
+akmod-wl
 
 # Classic session for GNOME
 @rfremix-workstation-product
