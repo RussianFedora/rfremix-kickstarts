@@ -53,6 +53,9 @@ case "$1" in
   -m)
     SPINS="MATE_Compiz-Live"
     ;;
+  -z)
+    SPINS="Workstation-Live-ZBR"
+    ;;
   -a)
     SPINS="Workstation-Live
 	   KDE-Live XFCE-Live
