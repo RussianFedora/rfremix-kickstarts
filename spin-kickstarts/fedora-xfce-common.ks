@@ -36,7 +36,6 @@ system-config-printer
 -acpid
 -gimp-help
 -desktop-backgrounds-basic
--aspell-*                   # dictionaries are big
 -xfce4-sensors-plugin
 -foomatic-db-ppds
 
