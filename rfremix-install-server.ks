@@ -16,8 +16,8 @@
 # use the source repo, we can't just include fedora-repo.ks
 
 # In non-master branches the fedora repo commands should be uncommented
-repo --name=fedora --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=fedora-28&arch=$basearch --excludepkgs=fedora-productimg-cloud,fedora-productimg-workstation,fedora-release,fedora-release-server,fedora-release,fedora-release-workstation,generic-release*,fedora-logos*
-repo --name=fedora-source  --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=fedora-source-28&arch=$basearch --excludepkgs=fedora-productimg-cloud,fedora-productimg-workstation,fedora-release,fedora-release-server,fedora-release,fedora-release-workstation,generic-release*,fedora-logos*
+repo --name=fedora --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=fedora-28&arch=$basearch --excludepkgs=fedora-productimg-cloud,fedora-productimg-workstation,fedora-release,fedora-release-server,fedora-release,fedora-release-workstation,generic-release*,fedora-logos*,fedora-productimg-server
+repo --name=fedora-source  --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=fedora-source-28&arch=$basearch --excludepkgs=fedora-productimg-cloud,fedora-productimg-workstation,fedora-release,fedora-release-server,fedora-release,fedora-release-workstation,generic-release*,fedora-logos*,fedora-productimg-server
 #repo --name=fedora-updates --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=updates-released-f28&arch=$basearch --excludepkgs=fedora-productimg-cloud,fedora-productimg-workstation,fedora-release,fedora-release-server,fedora-release,fedora-release-workstation,generic-release*,fedora-logos*
 #repo --name=fedora-updates-source  --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=updates-released-source-f28&arch=$basearch --excludepkgs=fedora-productimg-cloud,fedora-productimg-workstation,fedora-release,fedora-release-server,fedora-release,fedora-release-workstation,generic-release*,fedora-logos*
 
@@ -32,14 +32,14 @@ repo --name=rpmfusion-nonfree-source --mirrorlist=http://mirrors.rpmfusion.org/m
 #repo --name=rpmfusion-nonfree-updates-source --mirrorlist=http://mirrors.rpmfusion.org/mirrorlist?repo=nonfree-fedora-updates-released-source-28&arch=$basearch
 
 # Russian Fedora Repos
-repo --name=russianfedora-branding --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=branding-fedora-28&arch=$basearch
-repo --name=russianfedora-branding-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=branding-fedora-updates-released-28&arch=$basearch
+repo --name=russianfedora-branding --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=branding-fedora-28&arch=$basearch --excludepkgs=fedora-productimg-server
+repo --name=russianfedora-branding-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=branding-fedora-updates-released-28&arch=$basearch --excludepkgs=fedora-productimg-server
 repo --name=russianfedora-free --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=free-fedora-28&arch=$basearch
 repo --name=russianfedora-free-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=free-fedora-updates-released-28&arch=$basearch
 repo --name=russianfedora-nonfree --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=nonfree-fedora-28&arch=$basearch --exclude java*sun*
 repo --name=russianfedora-nonfree-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=nonfree-fedora-updates-released-28&arch=$basearch --exclude java*sun*
-repo --name=russianfedora-fixes --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=fixes-fedora-28&arch=$basearch
-repo --name=russianfedora-fixes-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=fixes-fedora-updates-released-28&arch=$basearch
+repo --name=russianfedora-fixes --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=fixes-fedora-28&arch=$basearch --excludepkgs=fedora-productimg-server
+repo --name=russianfedora-fixes-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=fixes-fedora-updates-released-28&arch=$basearch --excludepkgs=fedora-productimg-server
 
 repo --name=russianfedora-branding-source --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=branding-fedora-source-28&arch=$basearch
 repo --name=russianfedora-branding-updates-source --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=branding-fedora-updates-released-source-28&arch=$basearch
