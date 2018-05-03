@@ -56,7 +56,7 @@ repo --name=russianfedora-nonfree-updates-source --mirrorlist=http://mirrors.rfr
 %packages --default
 
 -fedora-productimg-cloud
-fedora-productimg-server
+-fedora-productimg-server
 -fedora-productimg-workstation
 
 # pungi is an inclusive depsolver so that multiple packages are brought 
