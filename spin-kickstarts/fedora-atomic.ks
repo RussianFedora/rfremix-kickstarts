@@ -68,7 +68,7 @@ arch=$(uname -m)
 
 # Set the origin to the "main ref", distinct from /updates/ which is where bodhi writes.
 # We want consumers of this image to track the two week releases.
-ostree admin set-origin --index 0 fedora-atomic https://kojipkgs.fedoraproject.org/atomic/28/ "fedora/28/${arch}/atomic-host"
+ostree admin set-origin --index 0 fedora-atomic https://kojipkgs.fedoraproject.org/compose/atomic/repo/ "fedora/28/${arch}/atomic-host"
 
 # Make sure the ref we're supposedly sitting on (according
 # to the updated origin) exists.
