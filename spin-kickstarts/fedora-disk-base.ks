@@ -14,7 +14,7 @@ timezone US/Eastern
 auth --useshadow --passalgo=sha512
 selinux --enforcing
 firewall --enabled --service=mdns
-services --enabled=sshd,NetworkManager,chronyd
+services --enabled=sshd,NetworkManager,chronyd,zram-swap
 network --bootproto=dhcp --device=link --activate
 rootpw --lock --iscrypted locked
 shutdown
@@ -33,6 +33,7 @@ firstboot --reconfig
 @core
 @standard
 @hardware-support
+zram
 
 kernel
 # remove this in %post
@@ -60,8 +61,6 @@ glibc-all-langpacks
 %post
 
 # Setup Raspberry Pi firmware
-cp -Pr /usr/share/bcm283x-firmware/* /boot/efi/
-mv -f /boot/efi/config-64.txt /boot/efi/config.txt
 cp -P /usr/share/uboot/rpi_3/u-boot.bin /boot/efi/rpi3-u-boot.bin
 
 releasever=$(rpm -q --qf '%{version}\n' rfremix-release)

@@ -5,6 +5,8 @@
 
 %packages --excludedocs --instLangs=en --nocore
 rootfiles
+# https://communityblog.fedoraproject.org/modularity-dead-long-live-modularity/
+fedora-repos-modular
 tar # https://bugzilla.redhat.com/show_bug.cgi?id=1409920
 vim-minimal
 dnf
@@ -20,6 +22,9 @@ rm -rf /tmp/*
 
 # https://pagure.io/atomic-wg/issue/308
 printf "tsflags=nodocs\n" >>/etc/dnf/dnf.conf
+
+# https://bugzilla.redhat.com/show_bug.cgi?id=1576993
+systemctl disable dnf-makecache.timer
 
 #Mask mount units and getty service so that we don't get login prompt
 systemctl mask systemd-remount-fs.service dev-hugepages.mount sys-fs-fuse-connections.mount systemd-logind.service getty.target console-getty.service

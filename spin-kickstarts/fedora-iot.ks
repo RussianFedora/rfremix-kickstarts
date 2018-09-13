@@ -8,13 +8,12 @@ timezone --utc Etc/UTC
 auth --useshadow --passalgo=sha512
 selinux --enforcing
 rootpw --lock --iscrypted locked
-firstboot --reconfig --enable
 
 # Add most common consoles console=ttyAMA0 console=ttyS0 console=ttyS1 as kernel boot parameter
 bootloader --timeout=1 --append="console=tty1 console=ttyS0,115200n8 console=ttyS1,115200n8 console=ttyAMA0,115200n8 net.ifnames=0 modprobe.blacklist=vc4"
 
 network --bootproto=dhcp --device=link --activate --onboot=on
-services --enabled=NetworkManager,sshd,rngd,initial-setup
+services --enabled=NetworkManager,sshd,rngd,initial-setup,zram-swap
 
 # tell Initial Setup to run in the reconfig mode
 firstboot --reconfig --enable
@@ -25,7 +24,7 @@ autopart --nohome --noswap --type=plain
 
 # Equivalent of %include fedora-repo.ks
 # Pull from the ostree repo that was created during the compose
-ostreesetup --nogpg --osname=fedora-iot --remote=fedora-iot --url=https://kojipkgs.fedoraproject.org/compose/iot/repo/ --ref=fedora/28/${basearch}/iot
+ostreesetup --nogpg --osname=fedora-iot --remote=fedora-iot --url=https://kojipkgs.fedoraproject.org/compose/iot/repo/ --ref=fedora/29/${basearch}/iot
 
 reboot
 
@@ -35,9 +34,7 @@ arch=$(uname -m)
 
 # Setup Raspberry Pi firmware
 if [[ $arch == "aarch64" ]] || [[ $arch == "armv7l" ]]; then
-cp -Pr /usr/share/bcm283x-firmware/* /boot/efi/
 if [[ $arch == "aarch64" ]]; then
-mv -f /boot/efi/config-64.txt /boot/efi/config.txt
 cp -P /usr/share/uboot/rpi_3/u-boot.bin /boot/efi/rpi3-u-boot.bin
 else
 cp -P /usr/share/uboot/rpi_2/u-boot.bin /boot/fw/rpi2-u-boot.bin
@@ -47,19 +44,19 @@ fi
 
 # Set the origin to the "main ref", distinct from /updates/ which is where bodhi writes.
 # We want consumers of this image to track the two week releases.
-ostree admin set-origin --index 0 fedora-iot https://kojipkgs.fedoraproject.org/iot/28/ "fedora/28/${arch}/iot"
+ostree admin set-origin --index 0 fedora-iot https://kojipkgs.fedoraproject.org/iot/29/ "fedora/29/${arch}/iot"
 
 # Make sure the ref we're supposedly sitting on (according
 # to the updated origin) exists.
-ostree refs "fedora-iot:fedora/28/${arch}/iot" --create "fedora-iot:fedora/28/${arch}/iot"
+ostree refs "fedora-iot:fedora/29/${arch}/iot" --create "fedora-iot:fedora/29/${arch}/iot"
 
 # Remove the old ref so that the commit eventually gets cleaned up.
-ostree refs "fedora-iot:fedora/28/${arch}/iot" --delete
+ostree refs "fedora-iot:fedora/29/${arch}/iot" --delete
 
 # delete/add the remote with new options to enable gpg verification
 # and to point them at the cdn url
 ostree remote delete fedora-iot
-ostree remote add --set=gpg-verify=true --set=gpgkeypath=/etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-28-primary fedora-iot 'https://dl.fedoraproject.org/iot/repo/'
+ostree remote add --set=gpg-verify=true --set=gpgkeypath=/etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-29-primary fedora-iot 'https://dl.fedoraproject.org/iot/repo/'
 
 # older versions of livecd-tools do not follow "rootpw --lock" line above
 # https://bugzilla.redhat.com/show_bug.cgi?id=964299

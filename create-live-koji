@@ -6,7 +6,7 @@
 usage()
 {
   echo
-  echo "Create RFRemix Live images based on Fedora 28 package base"
+  echo "Create RFRemix Live images based on Fedora 29 package base"
   echo "from internet."
   echo
   echo "create-live-koji <imagename> <i686|x86_64|all> <version> <release> [--scratch|--ksurl]"
@@ -133,7 +133,7 @@ elif [[ $(echo $SPINS | grep -v '\-Live') ]]; then
   usage
 fi
 
-DEVEL=""
+DEVEL="-devel"
 
 if [ "$VERSION" == "rawhide" ]; then
 TARGET=rawhide
@@ -229,8 +229,8 @@ do
              --repo=https://linuxdesktopcloud.mail.ru/rpm/Fedora/default
              --repo=https://repo.yandex.ru/yandex-disk/rpm/stable/x86_64
              --repo=https://repo.yandex.ru/yandex-browser/rpm/beta/x86_64
-             --repo=http://linux.dropbox.com/fedora/25
-             --repo=http://download.virtualbox.org/virtualbox/rpm/fedora/25/x86_64
+             --repo=http://linux.dropbox.com/fedora/28
+             --repo=http://download.virtualbox.org/virtualbox/rpm/fedora/28/x86_64
              --repo=https://repo.skype.com/rpm/stable
              --repo=http://mirror.yandex.ru/fedora/russianfedora/build/$VERSION/i386/"
     else

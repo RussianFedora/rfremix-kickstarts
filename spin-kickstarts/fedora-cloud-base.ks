@@ -15,9 +15,9 @@
 # For a TDL file, I store one here:
 # https://pagure.io/fedora-atomic/raw/master/f/fedora-atomic-rawhide.tdl
 # (Koji generates one internally...what we really want is Koji to publish it statically)
-# 
+#
 # Once you have imagefactory and imagefactory-plugins installed, run:
-# 
+#
 #   curl -O https://pagure.io/fedora-atomic/raw/master/f/fedora-atomic-rawhide.tdl
 #   tempfile=$(mktemp --suffix=.ks)
 #   ksflatten -v F22 -c fedora-cloud-base.ks > ${tempfile}
@@ -75,7 +75,6 @@ which
 # Need to also add back plymouth in order to mask failure of
 # systemd-vconsole-setup.service. BZ#1272684. Comment out for now
 #-plymouth
--NetworkManager
 -iprutils
 # Now that BZ#1199868 is fixed kbd really gets removed but it breaks
 # systemd-vconsole-setup.service on boot. Comment out for now
@@ -241,10 +240,10 @@ dd bs=1M if=/dev/zero of=/var/tmp/zeros || :
 rm -f /var/tmp/zeros
 echo "(Don't worry -- that out-of-space error was expected.)"
 
-# When we build the image with oz, dracut is used 
-# and sets up a ifcfg-en<whatever> for the device. We don't 
-# want to use this, we use eth0 so it is always the same. 
-# So we remove all these ifcfg-en<whatever> devices so 
+# When we build the image with oz, dracut is used
+# and sets up a ifcfg-en<whatever> for the device. We don't
+# want to use this, we use eth0 so it is always the same.
+# So we remove all these ifcfg-en<whatever> devices so
 # The 'network' service can come up cleanly.
 rm -f /etc/sysconfig/network-scripts/ifcfg-en*
 
