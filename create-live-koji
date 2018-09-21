@@ -121,7 +121,7 @@ fi
 VERSION=$(echo $RELEASE | awk -F[_.-] '{ print $1 }')
 
 RF_KICK_GITURL="https://github.com/RussianFedora/rfremix-kickstarts.git"
-LAST_COMMIT="$(git ls-remote $RF_KICK_GITURL refs/heads/f$VERSION/ksurl | awk '{ print $1 }')"
+LAST_COMMIT="$(git ls-remote $RF_KICK_GITURL refs/heads/f$VERSION | awk '{ print $1 }')"
 KSURL="--ksurl=git://github.com/RussianFedora/rfremix-kickstarts.git?#$LAST_COMMIT"
 
 if [ "x$SCRATCH" == "x--ksurl" ]; then
