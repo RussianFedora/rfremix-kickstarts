@@ -12,5 +12,5 @@ timezone Europe/Moscow
 
 %packages
 gparted
--pcmanfm-qt
+-lxqt-common
 %end
