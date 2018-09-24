@@ -9,6 +9,7 @@
 %packages
 -@^cloud-server-environment
 @^rfremix-cloud-server-environment
+-authconfig
 %end
 
 %post --erroronfail --log=/root/anaconda-post.log
