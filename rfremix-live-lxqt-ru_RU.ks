@@ -12,4 +12,5 @@ timezone Europe/Moscow
 
 %packages
 gparted
+-lxqt-common
 %end

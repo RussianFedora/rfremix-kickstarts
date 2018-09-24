@@ -15,6 +15,7 @@ timezone Europe/Moscow
 %packages
 gparted
 libappindicator-gtk3
+-gnome-shell-extension-gpaste
 tilix
 
 # Classic session for GNOME
