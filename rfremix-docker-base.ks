@@ -8,6 +8,7 @@
 %packages
 -fedora-release
 rfremix-release
+-authconfig
 %end
 
 %post --erroronfail --log=/root/anaconda-post.log
