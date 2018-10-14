@@ -76,6 +76,8 @@ qtoctave
 
 # IDEs for the IDE folks
 @eclipse
+# Workaround for: https://pagure.io/releng/issue/7814
+-eclipse-linuxtools-vagrant
 spyder
 
 #writing & publishing

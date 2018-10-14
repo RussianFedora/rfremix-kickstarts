@@ -37,6 +37,5 @@ system-config-printer
 -gimp-help
 -desktop-backgrounds-basic
 -xfce4-sensors-plugin
--foomatic-db-ppds
 
 %end
