@@ -183,7 +183,7 @@ do
 	sed -i 's@fedora-release)@rfremix-release)@g' rfremix-docker-base-$GITHASH-$DATE.ks
 
 	koji image-build RFRemix-$spin $RELEASE --distro Fedora-22 $TARGET \
-	    http://mirror.yandex.ru/fedora/russianfedora/build/$VERSION/\$arch/ \
+	    http://ftp.russianfedora.pro/fedora/russianfedora/build/$VERSION/\$arch/ \
 	    x86_64 \
 	    --release $BUILD $SCRATCH --nowait --disk-size=5 --format=docker \
 	    $KICKSTART
@@ -195,7 +195,7 @@ do
 	sed -i 's@fedora-release)@rfremix-release)@g' rfremix-cloud-base-$GITHASH-$DATE.ks
 
 	koji image-build RFRemix-$spin $RELEASE --distro Fedora-22 $TARGET \
-	    http://mirror.yandex.ru/fedora/russianfedora/build/$VERSION/\$arch/ \
+	    http://ftp.russianfedora.pro/fedora/russianfedora/build/$VERSION/\$arch/ \
 	    $(echo $ARCHES | sed 's@,@ @g') \
 	    --release $BUILD $SCRATCH --nowait --disk-size=4 \
 	    --format=qcow2 \
@@ -210,7 +210,7 @@ do
 	sed -i 's@fedora-release)@rfremix-release)@g' rfremix-cloud-base-vagrant-$GITHASH-$DATE.ks
 
 	koji image-build RFRemix-$spin $RELEASE --distro Fedora-22 $TARGET \
-	    http://mirror.yandex.ru/fedora/russianfedora/build/$VERSION/\$arch/ \
+	    http://ftp.russianfedora.pro/fedora/russianfedora/build/$VERSION/\$arch/ \
 	    $(echo $ARCHES | sed 's@,@ @g') \
 	    --release $BUILD $SCRATCH --nowait --disk-size=40 \
 	    --format=vagrant-virtualbox \
@@ -232,7 +232,7 @@ do
              --repo=http://linux.dropbox.com/fedora/28
              --repo=http://download.virtualbox.org/virtualbox/rpm/fedora/28/x86_64
              --repo=https://repo.skype.com/rpm/stable
-             --repo=http://mirror.yandex.ru/fedora/russianfedora/build/$VERSION/i386/"
+             --repo=http://ftp.russianfedora.pro/fedora/russianfedora/build/$VERSION/i386/"
     else
          unset EXTERNAL_PARAM
     fi
@@ -241,7 +241,7 @@ do
     koji spin-livemedia $SCRATCH --release $BUILD \
 	--skip-tag --noprogress RFRemix-$spin $RELEASE --nowait \
         --title=RFRemix-$spin \
-        --repo=http://mirror.yandex.ru/fedora/russianfedora/build/$VERSION/\$basearch/ \
+        --repo=http://ftp.russianfedora.pro/fedora/russianfedora/build/$VERSION/\$basearch/ \
         $EXTERNAL_PARAM $TARGET $ARCHES rfremix-live-$lspin-$GITHASH-$DATE-ru_RU.ks
     rm -f rfremix-live-$lspin-$GITHASH-$DATE-ru_RU.ks
     fi

@@ -3,7 +3,7 @@
 
 part / --size=10656
 
-url --url="http://mirror.yandex.ru/fedora/russianfedora/build/28/$basearch/"
+url --url="http://ftp.russianfedora.pro/fedora/russianfedora/build/29/$basearch/"
 
 # Fonts and input methods for Russia
 
