@@ -11,6 +11,7 @@ keyboard ru
 timezone Europe/Moscow
 
 %packages
+rfremix-release-matecompiz
 gparted
 %end
 
