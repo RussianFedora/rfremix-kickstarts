@@ -12,6 +12,9 @@ timezone Europe/Moscow
 
 %packages
 rfremix-release-matecompiz
+rfremix-release
+-fedora-release
+-fedora-release-matecompiz
 gparted
 %end
 
